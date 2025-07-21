@@ -25,6 +25,7 @@ Syntethic_DSL/              # Synthetic DSL examples
 - `<model_file>`: Path to your MiniZinc model (inside minizinc_model folder)
 - `<dsl_file>`: Path to your DSL input file 
 - `<dzn_file>`: Path to your dzn file (inside dzn_experiments)
+- `<timestep>`: specifie a time point inside time windows (e.g. 5 or 10 or ...)
 
 ### Manual Steps
 
@@ -33,14 +34,18 @@ Syntethic_DSL/              # Synthetic DSL examples
    python 0_1_dsl_converter.py `<dsl_file>` `<dzn_file>`
    ```
 
-2a. **Run MiniZinc:**
+2a. **Run MiniZinc result in terminal:**
    ```sh
-   python 0_2_minizinc.py `<model_file>` `<dzn_file>`
+   python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
    ```
 
-2b. **Run MiniZinc and Generate chart:**
+2b. **Run MiniZinc result with analisi on specific time step:**
    ```sh
-   python 0_3_display.py --exec python 0_2_minizinc.py `<model_file>` `<dzn_file>`
+   python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
+
+2c. **Run MiniZinc result chart:**
+   ```sh
+   python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
    ```
 
 ## Examples
