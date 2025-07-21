@@ -18,6 +18,7 @@ Syntethic_DSL/              # Synthetic DSL examples
 
 - Python
 - [MiniZinc](https://www.minizinc.org/) installed and available in your PATH
+- You can also use the model directly inside Minizinc editor
 
 
 
