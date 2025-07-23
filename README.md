@@ -77,6 +77,7 @@ conda info --envs.
 ```sh
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
 
+
 2c. **Run MiniZinc result chart:**
 
 ```sh
