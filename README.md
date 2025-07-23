@@ -56,7 +56,7 @@ conda info --envs.
 
 - `<model_file>`: Path to your MiniZinc model (inside minizinc_model folder)
 - `<dsl_file>`: Path to your DSL input file
-- `<dzn_file>`: Path to your dzn file (inside dzn_experiments)
+- `<dzn_file>`: Path to your dzn file used as output or input
 - `<timestep>`: specifie a time point inside time windows (e.g. 5 or 10 or ...)
 
 ### Manual Steps
@@ -72,16 +72,16 @@ conda info --envs.
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
 ```
 
-2b. **Run MiniZinc result with analisi on specific time step:**
+2b. **Run MiniZinc result in terminal with analyses on specific time step:**
 
 ```sh
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
+```
 
-
-2c. **Run MiniZinc result chart:**
+2c. **Run MiniZinc visual result:**
 
 ```sh
-   python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
+   python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`   ```
 ```
 
 ## Examples
