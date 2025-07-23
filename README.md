@@ -1,4 +1,4 @@
-# WSP - Automated Task Workload Scheduling in Constrained Services Environment
+# WSP - Automated workload scheduling in constrained service-based environments
 
 ## Folder Structure
 
@@ -52,11 +52,10 @@ or
 conda info --envs.
 ```
 
-
-
 ### Parameters:
+
 - `<model_file>`: Path to your MiniZinc model (inside minizinc_model folder)
-- `<dsl_file>`: Path to your DSL input file 
+- `<dsl_file>`: Path to your DSL input file
 - `<dzn_file>`: Path to your dzn file (inside dzn_experiments)
 - `<timestep>`: specifie a time point inside time windows (e.g. 5 or 10 or ...)
 
@@ -68,18 +67,20 @@ conda info --envs.
    ```
 
 2a. **Run MiniZinc result in terminal:**
-   ```sh
+
+```sh
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
-   ```
+```
 
 2b. **Run MiniZinc result with analisi on specific time step:**
-   ```sh
+
+```sh
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
 
 2c. **Run MiniZinc result chart:**
    ```sh
    python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
-   ```
+```
 
 ## Examples
 

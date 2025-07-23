@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-"""
-Automation script for the task scheduling pipeline.
-Takes a DSL file as input and runs the complete pipeline.
-
-Usage: python pipeline_auto.py <model_file> <dsl_file>
-Example: python pipeline_auto.py model.mzn .\dsl_base\22_space.dsl
-"""
-
 import sys
 import os
 import subprocess

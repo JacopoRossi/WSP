@@ -2,17 +2,17 @@ import minizinc
 import sys
 
 def main():
-    # Verifica che siano stati forniti almeno i due file principali
+
     if len(sys.argv) < 3:
-        print("Usage: python solver.py <model_file.mzn> <data_file.dzn> [query_time]")
-        print("Example: python solver.py 0_modello_ufficiale.mzn 777_space.dzn 100")
+        print("Usage: python 0_2_minizinc.py <model_file.mzn> <data_file.dzn> [query_time]")
+        print("Example: python 0_2_minizinc.py 0_model.mzn 777_space.dzn 100")
         sys.exit(1)
     
-    # Ottieni i nomi dei file dai parametri
+
     mzn_file = sys.argv[1]
     dzn_file = sys.argv[2]
     
-    # Se è specificato query_time come terzo parametro
+
     query_time = None
     if len(sys.argv) >= 4:
         try:
@@ -29,7 +29,7 @@ def main():
         # Load data from dzn file
         instance.add_file(dzn_file)
         
-        # Imposta query_time se specificato
+
         if query_time is not None:
             instance["query_time"] = query_time
             print(f"Setting query_time = {query_time}")

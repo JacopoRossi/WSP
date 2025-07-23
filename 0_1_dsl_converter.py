@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""
-Enhanced DSL to DZN Converter for Task Scheduling with Services Support
-Supports both legacy format and new template-based format with services
-Converts DSL files to DZN format for constraint programming solvers
-Uses h_start and h_end instead of horizon
-"""
-
 import re
 import sys
 import yaml
