@@ -20,9 +20,41 @@ Syntethic_DSL/              # Synthetic DSL examples
 - [MiniZinc](https://www.minizinc.org/) installed and available in your PATH
 - You can also use the model directly inside Minizinc editor
 
+## Set Up Python using conda
+
+It is possible to use the already defined conda environment.
+
+After having installed **Conda** or **Miniconda** following the [website](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) instructions, download the Github project, open the terminal or an Anaconda Prompt, change directory to go to the location where the file "env.yml" is located and do the following steps:
+
+1. Create the environment from the env.yml file:
+
+```
+conda env create -f env.yml
+```
+
+The first line of the yml file sets the new environment's name, in this case "wsl_env"
+
+2. Activate the new environment:
+
+```
+conda activate wsl_env
+```
+
+3. Verify that the new environment was installed correctly:
+
+```
+conda env list
+```
+
+or
+
+```
+conda info --envs.
+```
 
 
-**Parameters:**
+
+### Parameters:
 - `<model_file>`: Path to your MiniZinc model (inside minizinc_model folder)
 - `<dsl_file>`: Path to your DSL input file 
 - `<dzn_file>`: Path to your dzn file (inside dzn_experiments)
@@ -62,4 +94,3 @@ python unifyScript.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
 ## Notes
 
 - `.dzn` files are generated automatically in the `dzn_experiments/` folder.
-- MiniZinc models are in [`minizinc_model/`](minizinc_model/).
