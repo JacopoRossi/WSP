@@ -59,7 +59,7 @@ conda info --envs.
 - `<dzn_file>`: Path to your dzn file used as output or input
 - `<timestep>`: specifie a time point inside time windows (e.g. 5 or 10 or ...)
 
-### Manual Steps
+### Steps
 
 1. **Convert DSL to DZN:**
    ```sh
@@ -84,15 +84,21 @@ conda info --envs.
    python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`   ```
 ```
 
-## Examples
+## Automatic Steps
+
+It is possible to execute the script 1 and 2a automatically by running:
+
+```sh
+python unifyScript.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
+```
+
+It is possible to execute the script 1 and 2c automatically by running:
 
 ```sh
 python unifyScriptDisplay.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
 ```
 
-```sh
-python unifyScript.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
-```
+
 
 ## Notes
 
