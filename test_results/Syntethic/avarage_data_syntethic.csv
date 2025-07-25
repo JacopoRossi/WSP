@@ -1,0 +1,13 @@
+dsl_filename,avarage_execution_time_sec,avarage_cpu_usage_percent
+8_task,3.038,7.13
+12_task,4.398,8.139
+16_task,5.647,8.384
+20_task,7.267,8.448
+24_task,9.478,8.32
+28_task,10.092,8.307
+32_task,15.218,8.268
+36_task,20.61,8.805
+40_task,21.973,8.918
+44_task,22.93,9.004
+48_task,29.207,9.042
+52_task,31.022,8.999

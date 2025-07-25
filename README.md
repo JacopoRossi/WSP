@@ -12,6 +12,7 @@ dzn_experiments/            # Output folder for generated .dzn files
 minizinc_model/             # MiniZinc models (.mzn)
 SpaceOBC_DSL/               # Example DSL files (SpaceOBC)
 Syntethic_DSL/              # Synthetic DSL examples
+test_results/               # Contains the test results for the two use cases
 ```
 
 ## Requirements
@@ -72,7 +73,7 @@ conda info --envs.
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
 ```
 
-2b. **Run MiniZinc result in terminal with analyses on specific time step:**
+2b. **Run MiniZinc result in terminal with analysis on specific time step:**
 
 ```sh
    python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
@@ -97,8 +98,6 @@ It is possible to execute the script 1 and 2c automatically by running:
 ```sh
 python unifyScriptDisplay.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
 ```
-
-
 
 ## Notes
 

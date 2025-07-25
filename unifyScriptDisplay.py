@@ -7,7 +7,7 @@ from pathlib import Path
 
 def run_command(cmd, description):
     """Run a command and handle errors"""
-    print(f"\n🚀 {description}")
+    print(f"\n {description}")
     print(f"   Command: {cmd}")
     print("   " + "="*50)
     
@@ -21,11 +21,11 @@ def run_command(cmd, description):
         if result.stdout:
             print(result.stdout)
         
-        print(f"✅ {description} completed successfully!")
+        print(f" {description} completed successfully!")
         return True
         
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error in {description}:")
+        print(f" Error in {description}:")
         print(f"   Return code: {e.returncode}")
         
         if e.stdout:
@@ -41,7 +41,7 @@ def run_command(cmd, description):
 
 def run_command_save_to_temp_file(cmd, description):
     """Run a command and save its output to a temporary file"""
-    print(f"\n🚀 {description}")
+    print(f"\n {description}")
     print(f"   Command: {cmd}")
     print("   " + "="*50)
     
@@ -57,12 +57,12 @@ def run_command_save_to_temp_file(cmd, description):
         output_content = ""
         if result.stdout and result.stdout.strip():
             output_content = result.stdout.strip()
-            print("✅ Output captured from stdout")
+            print(" Output captured from stdout")
         elif result.stderr and result.stderr.strip():
             output_content = result.stderr.strip()
-            print("✅ Output captured from stderr")
+            print(" Output captured from stderr")
         else:
-            print("⚠️  No output captured")
+            print("  No output captured")
             return None, None
         
         # Create temporary file
@@ -74,14 +74,14 @@ def run_command_save_to_temp_file(cmd, description):
         temp_file.write(output_content)
         temp_file.close()
         
-        print(f"✅ Output saved to temporary file: {temp_file.name}")
-        print(f"📝 Content preview: {output_content[:100]}...")
-        print(f"✅ {description} completed successfully!")
+        print(f" Output saved to temporary file: {temp_file.name}")
+        print(f" Content preview: {output_content[:100]}...")
+        print(f" {description} completed successfully!")
         
         return temp_file.name, output_content
         
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error in {description}:")
+        print(f" Error in {description}:")
         print(f"   Return code: {e.returncode}")
         
         # Try to capture output even if command failed
@@ -106,10 +106,10 @@ def run_command_save_to_temp_file(cmd, description):
                                                        delete=False)
                 temp_file.write(output_content)
                 temp_file.close()
-                print(f"📝 Output saved to temporary file despite error: {temp_file.name}")
+                print(f" Output saved to temporary file despite error: {temp_file.name}")
                 return temp_file.name, output_content
             except Exception as file_error:
-                print(f"❌ Could not save output to temporary file: {file_error}")
+                print(f" Could not save output to temporary file: {file_error}")
         
         return None, None
 
@@ -118,9 +118,9 @@ def cleanup_temp_file(temp_file_path):
     if temp_file_path and Path(temp_file_path).exists():
         try:
             os.unlink(temp_file_path)
-            print(f"🧹 Temporary file cleaned up: {temp_file_path}")
+            print(f" Temporary file cleaned up: {temp_file_path}")
         except Exception as e:
-            print(f"⚠️  Could not clean up temporary file {temp_file_path}: {e}")
+            print(f"  Could not clean up temporary file {temp_file_path}: {e}")
 
 def main():
     parser = argparse.ArgumentParser(
@@ -144,16 +144,16 @@ Examples:
     # Validate input files
     dsl_path = Path(args.dsl_file)
     if not dsl_path.exists():
-        print(f"❌ Error: DSL file '{args.dsl_file}' not found!")
+        print(f" Error: DSL file '{args.dsl_file}' not found!")
         sys.exit(1)
     
     model_path = Path(args.model_file)
     if not model_path.exists():
-        print(f"❌ Error: Model file '{args.model_file}' not found!")
+        print(f" Error: Model file '{args.model_file}' not found!")
         sys.exit(1)
     
     if not dsl_path.suffix == '.dsl':
-        print(f"⚠️  Warning: Input file doesn't have .dsl extension")
+        print(f"  Warning: Input file doesn't have .dsl extension")
     
     # Extract filename without extension and directory
     file_stem = dsl_path.stem  # e.g., "22_space" from "22_space.dsl"
@@ -161,13 +161,13 @@ Examples:
     # Build paths
     dzn_output = f".\\dzn_experiments\\{file_stem}.dzn"
     
-    print("🎯 TASK SCHEDULING PIPELINE AUTOMATION")
+    print(" TASK SCHEDULING PIPELINE AUTOMATION")
     print("="*60)
-    print(f"📁 Input model file: {args.model_file}")
-    print(f"📁 Input DSL file: {args.dsl_file}")
-    print(f"📁 Output DZN file: {dzn_output}")
-    print(f"📊 Base name: {file_stem}")
-    print(f"🗂️  Using temporary file for MiniZinc results")
+    print(f" Input model file: {args.model_file}")
+    print(f" Input DSL file: {args.dsl_file}")
+    print(f" Output DZN file: {dzn_output}")
+    print(f" Base name: {file_stem}")
+    print(f" Using temporary file for MiniZinc results")
     
     # Create dzn_experiments directory if it doesn't exist
     dzn_dir = Path("dzn_experiments")
@@ -181,12 +181,12 @@ Examples:
         success1 = run_command(cmd1, "DSL to DZN Conversion")
         
         if not success1:
-            print("\n❌ Pipeline failed at step 1!")
+            print("\n Pipeline failed at step 1!")
             sys.exit(1)
         
         # Verify DZN file was created
         if not Path(dzn_output).exists():
-            print(f"❌ Error: Expected output file '{dzn_output}' was not created!")
+            print(f" Error: Expected output file '{dzn_output}' was not created!")
             sys.exit(1)
         
         # Step 2: Run MiniZinc and save result to temporary file
@@ -194,7 +194,7 @@ Examples:
         temp_file_path, output_content = run_command_save_to_temp_file(minizinc_cmd, "MiniZinc Execution")
         
         if not temp_file_path:
-            print("\n❌ Pipeline failed at step 2 (MiniZinc execution)!")
+            print("\n Pipeline failed at step 2 (MiniZinc execution)!")
             sys.exit(1)
         
         # Step 3: Generate Gantt chart using the temporary file
@@ -202,28 +202,28 @@ Examples:
         success3 = run_command(display_cmd, "Gantt Chart Generation")
         
         if not success3:
-            print("\n❌ Pipeline failed at step 3 (Gantt chart generation)!")
-            print(f"💡 Try running manually: {display_cmd}")
-            print(f"📁 MiniZinc result is in temporary file: {temp_file_path}")
+            print("\n Pipeline failed at step 3 (Gantt chart generation)!")
+            print(f" Try running manually: {display_cmd}")
+            print(f" MiniZinc result is in temporary file: {temp_file_path}")
             if args.keep_temp:
-                print(f"🗂️  Temporary file kept as requested")
+                print(f"  Temporary file kept as requested")
             sys.exit(1)
         
         # Summary
         print("\n" + "="*60)
-        print("🎉 PIPELINE COMPLETED SUCCESSFULLY!")
+        print(" PIPELINE COMPLETED SUCCESSFULLY!")
         print("="*60)
-        print(f"✅ Model file processed: {args.model_file}")
-        print(f"✅ DSL file processed: {args.dsl_file}")
-        print(f"✅ DZN file generated: {dzn_output}")
-        print(f"✅ MiniZinc execution completed")
-        print("✅ Gantt chart generated")
+        print(f" Model file processed: {args.model_file}")
+        print(f" DSL file processed: {args.dsl_file}")
+        print(f" DZN file generated: {dzn_output}")
+        print(f" MiniZinc execution completed")
+        print(" Gantt chart generated")
         
-        print("\n📊 Check the output for your scheduling results!")
+        print("\n Check the output for your scheduling results!")
         
         # Keep temporary file if requested
         if args.keep_temp:
-            print(f"🗂️  Temporary file kept as requested: {temp_file_path}")
+            print(f"  Temporary file kept as requested: {temp_file_path}")
             temp_file_path = None  # Don't clean up
         
     finally:
