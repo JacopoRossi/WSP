@@ -283,13 +283,17 @@ else
   if query_time >= h_start /\ not fix(is_feasible) then
     [
       "\n=== TIME POINT ANALYSIS ===\n",
-      "Cannot analyze time \(query_time) - solution is unfeasible.\n"
+      "Can't analyze time \(query_time) - solution is unfeasible.\n"
     ]
   else 
-    if query_time < h_start \/ query_time >= h_end then
-      [
-        ""
-      ]
+    if (query_time < h_start \/ query_time >= h_end) then
+      if query_time != -1 then
+        [
+          "\nCan't analyze the proposed time point"
+        ]
+      else
+        [""]
+      endif
     else 
       [""]
     endif

@@ -70,19 +70,19 @@ conda info --envs.
 2a. **Run MiniZinc result in terminal:**
 
 ```sh
-   python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`
+   python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn `<dzn_file>`
 ```
 
-2b. **Run MiniZinc result in terminal with analysis on specific time step:**
+2b. **Run MiniZinc result in terminal with analysis on specific time point:**
 
 ```sh
-   python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>` `<timestep>`   ```
+   python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn `<dzn_file>` `<timestep>`   ```
 ```
 
 2c. **Run MiniZinc visual result:**
 
 ```sh
-   python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelResourceSpecific.mzn `<dzn_file>`   ```
+   python 0_3_display.py --exec python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn `<dzn_file>`   ```
 ```
 
 ## Automatic Steps
@@ -90,13 +90,13 @@ conda info --envs.
 It is possible to execute the script 1 and 2a automatically by running:
 
 ```sh
-python unifyScript.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
+python unifyScript.py minizinc_model/modelAllOpsParameter.mzn `<dsl_file>`
 ```
 
 It is possible to execute the script 1 and 2c automatically by running:
 
 ```sh
-python unifyScriptDisplay.py minizinc_model/modelResourceSpecific.mzn `<dsl_file>`
+python unifyScriptDisplay.py minizinc_model/modelAllOpsParameter.mzn `<dsl_file>`
 ```
 
 ## Notes
