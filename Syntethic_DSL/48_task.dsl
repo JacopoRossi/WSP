@@ -1,7 +1,7 @@
 # Enhanced DSL - 48 Task Pipeline Experiment
 
 # global configuration
-environment:
+wsp:
   name: "48tasks"
   h_start: 0
   h_end: 530
