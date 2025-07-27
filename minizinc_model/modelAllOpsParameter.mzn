@@ -165,9 +165,7 @@ constraint forall(task in 1..n_tasks, t in 0..(h_end - h_start)-1)(
 );
 
 % Objective - but allow solutions even if not optimal
-solve 
-  :: int_search(start, input_order, indomain_min, complete)
-  minimize makespan;
+solve minimize makespan;
 
 % Clean Output
 output [
