@@ -1,0 +1,83 @@
+% Task Scheduling Data File with Services
+% Generated from Enhanced DSL format
+% Uses h_start and h_end time window instead of horizon
+% Project: test_machines
+
+
+% Basic parameters
+
+n_tasks = 3;
+
+% Time window
+h_start = 0;  % Planning window start time
+h_end = 100;      % Planning window end time
+
+max_resource = 50;
+
+
+% Service information
+
+n_services = 2;
+
+service_names = ["Payment_Machine", "Processing_Machine"];
+
+task_to_service = [1, 2, 2];  % Which service each task belongs to (0 = no service)
+
+% Service composition:
+% Service 1 (Payment_Machine): Tasks [T1]
+% Service 2 (Processing_Machine): Tasks [T2, T3]
+
+
+% Task properties
+
+task_names = ["Payment_Task", "Process_A", "Process_B"];
+
+durations = [5, 3, 4];
+
+resource_reqs = [4, 2, 3];
+
+rep_counts = [0, 0, 0];
+
+rep_delays = [0, 0, 0];
+
+max_concurrency = [2, 3, 2];
+
+task_signatures = ["PAY", "PROC_A", "PROC_B"];
+
+
+% Set up expanded tasks mapping
+
+n_expanded = 3;  % 3 original tasks + 0 repetitions
+
+
+original_task = [
+  % For each task, list all its repetitions (original + additional)
+  1,                % Payment_Task (1 instance)
+  2,                % Process_A (1 instance)
+  3                % Process_B
+];
+
+
+repetition_number = [
+  0,                % Payment_Task (original)
+  0,                % Process_A (original)
+  0                % Process_B (original)
+];
+
+
+% Finish-to-start precedence constraints (id: 1 for Payment_Task, 2 for Process_A, etc.)
+
+n_pred = 0;
+pred_from = [];
+pred_to = [];
+pred_wait_all = [];
+
+
+% Start-to-start precedence constraints
+
+n_start_pred = 1;
+start_pred_from = [1];
+start_pred_to =   [2];
+start_pred_wait_all = [false];
+start_pred_delays = [5];
+

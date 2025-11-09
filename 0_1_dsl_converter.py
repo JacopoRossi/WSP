@@ -77,9 +77,10 @@ class EnhancedDSLToDZNConverter:
                 normalized_task = self._normalize_task(task_data)
                 normalized['tasks'].append(normalized_task)
         
-        # Handle services section
-        if 'services' in data:
-            for service_data in data['services']:
+        # Handle services section (supports both 'services' and 'machines' keywords)
+        services_data = data.get('services', data.get('machines', []))
+        if services_data:
+            for service_data in services_data:
                 normalized_service = self._normalize_service(service_data)
                 normalized['services'].append(normalized_service)
         

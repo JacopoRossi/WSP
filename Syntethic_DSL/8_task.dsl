@@ -7,7 +7,7 @@ wsp:
   h_end: 150
   r_max: 110
 
-# Service definitions
+# Service definitions (you can also use 'machines:' instead of 'services:')
 services:
   - id: 1
     name: "Payment_Service"
