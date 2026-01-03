@@ -1,0 +1,47 @@
+Based on the following documentation, extract the key information needed to generate a DSL specification:
+
+DOCUMENTATION:
+{documentation}
+
+RELEVANT CONTEXT (from RAG):
+{rag_context}
+
+Please extract and structure the following information:
+
+1. **GLOBAL PARAMETERS**:
+   - System name
+   - Time window start (h_start)
+   - Time window end (h_end)
+   - Maximum resources available (r_max)
+
+2. **SERVICES**:
+   For each service, identify:
+   - Service ID (unique integer)
+   - Service name
+   - List of task IDs that belong to this service
+
+3. **TASKS**:
+   For each task, extract:
+   - Task ID (unique integer)
+   - Task name (descriptive, uppercase with underscores)
+   - Signature (sig): short lowercase identifier
+   - Duration (dur): execution time in time units
+   - Resource quantity (res_q): number of resources required
+   - Repetition count (rc): number of times the task repeats (0 if single execution)
+   - Repetition delay (rd): time units between repetitions (0 if no repetition)
+   - Maximum concurrency (max_c): maximum number of simultaneous instances
+
+4. **START CONSTRAINTS**:
+   For each temporal dependency:
+   - From task ID (source task)
+   - To task ID (destination task)
+   - Delay: time units after source task starts before destination can start
+   - Wait_all: boolean indicating if destination must wait for source completion
+
+Provide the extracted information in a structured format that can be directly converted to the DSL YAML format.
+
+Pay special attention to:
+- Consistency between service task_sets and actual task IDs
+- Proper identification of task repetition patterns
+- Accurate extraction of temporal constraints and their parameters
+- Correct identification of wait_all semantics (true = wait for completion, false = only wait for delay)
