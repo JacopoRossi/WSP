@@ -74,7 +74,7 @@ Examples:
     file_stem = dsl_path.stem  # e.g., "22_space" from "22_space.dsl"
     
     # Build paths
-    dzn_output = f".\\dzn_experiments\\{file_stem}.dzn"
+    dzn_output = Path("dzn_experiments") / f"{file_stem}.dzn"
     
     print(" TASK SCHEDULING PIPELINE AUTOMATION")
     print("="*60)
@@ -88,7 +88,7 @@ Examples:
     dzn_dir.mkdir(exist_ok=True)
     
     # Step 1: Convert DSL to DZN
-    cmd1 = f"python .\\0_1_dsl_converter.py {args.dsl_file} {dzn_output}"
+    cmd1 = f"python 0_1_dsl_converter.py {args.dsl_file} {dzn_output}"
     success1 = run_command(cmd1, "DSL to DZN Conversion")
     
     if not success1:
@@ -96,7 +96,7 @@ Examples:
         sys.exit(1)
     
     # Verify DZN file was created
-    if not Path(dzn_output).exists():
+    if not dzn_output.exists():
         print(f" Error: Expected output file '{dzn_output}' was not created!")
         sys.exit(1)
     
