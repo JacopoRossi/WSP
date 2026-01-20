@@ -7,6 +7,7 @@ from pathlib import Path
 from ..llm.llm_client import LLMClient
 from ..llm.prompt_builder import PromptBuilder
 from ..rag.vector_store import VectorStore
+from ..rag.document_loader import DocumentLoader
 from .validator import DSLValidator
 from .templates import DSLTemplate
 
@@ -93,17 +94,19 @@ class DSLGenerator:
         if self.use_rag:
             print("  🔍 Recupero contesto rilevante con RAG...")
             queries = [
-                "global parameters system configuration",
-                "services and tasks definition",
-                "temporal constraints dependencies"
+                "global parameters system configuration time window resources",
+                "services tasks list complete all tasks",
+                "start constraints precedence dependencies all relationships",
+                "task properties duration resources repetition",
+                "temporal constraints delay wait_all complete list"
             ]
             
             contexts = []
             for query in queries:
                 ctx = self.vector_store.get_relevant_context(
                     query,
-                    top_k=3,
-                    max_chars=1500
+                    top_k=20,  # RADDOPPIATO: 10 → 20
+                    max_chars=16000  # RADDOPPIATO: 8000 → 16000
                 )
                 if ctx:
                     contexts.append(ctx)
@@ -271,8 +274,29 @@ class DSLGenerator:
         # Carica documentazione
         print(f"📄 Caricamento documentazione da: {documentation_path}")
         
-        with open(documentation_path, 'r', encoding='utf-8') as f:
-            documentation = f.read()
+        doc_path = Path(documentation_path)
+        file_extension = doc_path.suffix.lower()
+        
+        # Per file di testo (.md, .txt), leggi direttamente
+        if file_extension in ['.md', '.txt']:
+            with open(documentation_path, 'r', encoding='utf-8') as f:
+                documentation = f.read()
+        # Per PDF e altri formati binari, usa DocumentLoader
+        elif file_extension in ['.pdf', '.docx']:
+            loader = DocumentLoader()
+            docs = loader.load_document(documentation_path)
+            # Concatena tutti i chunks
+            documentation = "\n\n".join(doc.content for doc in docs)
+        else:
+            # Prova a leggere come testo
+            try:
+                with open(documentation_path, 'r', encoding='utf-8') as f:
+                    documentation = f.read()
+            except UnicodeDecodeError:
+                # Fallback: usa DocumentLoader
+                loader = DocumentLoader()
+                docs = loader.load_document(documentation_path)
+                documentation = "\n\n".join(doc.content for doc in docs)
         
         print(f"✓ Documentazione caricata ({len(documentation)} caratteri)")
         

@@ -6,7 +6,7 @@ llm:
   model: "gpt-5.1"  # Modello efficiente e veloce (gpt-4o-mini, gpt-4o, gpt-3.5-turbo)
   api_key: "${OPENAI_API_KEY}"  # Set via environment variable
   temperature: 0.2
-  max_tokens: 2000  # Ridotto per evitare context length exceeded
+  max_tokens: 8000  # RADDOPPIATO: 4000 → 8000 per DSL molto complessi
   encoding: "cl100k_base"  # Encoding per il tokenizer
   
   # Alternative configurations
@@ -32,8 +32,8 @@ rag:
   # embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
   
   # Chunking strategy
-  chunk_size: 1000
-  chunk_overlap: 200
+  chunk_size: 4000  # RADDOPPIATO: 2000 → 4000
+  chunk_overlap: 800  # RADDOPPIATO: 400 → 800
   
   # Vector store
   vector_store: "chromadb"  # Options: chromadb, faiss
@@ -41,8 +41,8 @@ rag:
   collection_name: "dsl_documentation"
   
   # Retrieval
-  top_k: 5
-  similarity_threshold: 0.7
+  top_k: 20  # RADDOPPIATO: 10 → 20
+  similarity_threshold: 0.3  # Ulteriormente ridotto per massima copertura
   
   # Document processing
   supported_formats:

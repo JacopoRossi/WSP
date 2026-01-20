@@ -45,4 +45,12 @@ REQUIREMENTS:
 5. Maintain the exact order: wsp, services, tasks, start_constraints
 6. Add inline comments for task names in constraints (e.g., "# TASK_NAME")
 
+CRITICAL - START CONSTRAINTS:
+- You MUST generate ALL start_constraints (precedence relationships) mentioned in the documentation
+- Do NOT omit or skip any constraints
+- Each constraint represents a dependency between tasks that must be preserved
+- Include ALL task dependencies, not just a subset
+- If the documentation mentions N constraints, generate exactly N constraints
+- Missing constraints will break the system's scheduling logic
+
 Generate the complete DSL now. Output ONLY the YAML content, no additional explanation.

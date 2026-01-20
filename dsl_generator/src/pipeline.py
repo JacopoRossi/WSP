@@ -191,15 +191,9 @@ class DSLGeneratorPipeline:
         print(f"🚀 GENERAZIONE DSL")
         print(f"{'='*60}\n")
         
-        # Controlla se il vector store è vuoto
-        stats = self.vector_store.get_stats()
-        vector_store_empty = stats['total_documents'] == 0
-        
-        # Se non usa indexed O se il vector store è vuoto, indicizza il file di input
-        if not use_indexed or vector_store_empty:
-            if vector_store_empty and use_indexed:
-                print("📑 Vector store vuoto - indicizzazione automatica del file di input per RAG...")
-            self.index_documentation(documentation_path, reset_collection=True)
+        # SEMPRE resetta e reindicizza il file di input per garantire dati freschi
+        print("📑 Reset vector store e indicizzazione del file di input...")
+        self.index_documentation(documentation_path, reset_collection=True)
         
         # Determina output path
         if output_path is None:
