@@ -31,7 +31,7 @@ class Document:
 class DocumentLoader:
     """Carica documenti da vari formati e li preprocessa"""
     
-    def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
+    def __init__(self, chunk_size, chunk_overlap):
         """
         Inizializza il document loader
         

@@ -27,7 +27,7 @@ class EmbeddingGenerator:
     
     def __init__(self, 
                  provider: str = "openai",
-                 model: str = "text-embedding-3-small",
+                 model: str = "text-embedding-3-large",
                  api_key: Optional[str] = None):
         """
         Inizializza il generatore di embeddings
@@ -46,7 +46,7 @@ class EmbeddingGenerator:
                 model=model,
                 openai_api_key=api_key
             )
-            self.dimension = 1536  # Default per text-embedding-3-small
+            self.dimension = 3072  # Default per text-embedding-3-large
             
         elif provider == "huggingface":
             self.embeddings = HuggingFaceEmbeddings(

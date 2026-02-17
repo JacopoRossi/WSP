@@ -1,0 +1,148 @@
+UnifyScript run for 8_task_manual_run2.dsl
+Started at: 2026-02-12 00:55:01.862098
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/task8/8_task_manual_run2.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/task8/8_task_manual_run2.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/task8/8_task_manual_run2.dsl
+ Output DZN file: dzn_experiments/8_task_manual_run2.dzn
+ Base name: 8_task_manual_run2
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/task8/8_task_manual_run2.dsl dzn_experiments/8_task_manual_run2.dzn
+   ==================================================
+Successfully converted DSL/task8/8_task_manual_run2.dsl to dzn_experiments/8_task_manual_run2.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/8_task_manual_run2.dzn
+   ==================================================
+Loading model: minizinc_model/modelAllOpsParameter.mzn
+Loading data: dzn_experiments/8_task_manual_run2.dzn
+Solving...
+
+Result:
+FEASIBLE
+Makespan end: 60
+
+Schedule:
+Task "PAY_VAL": start=0, end=5
+Task "INV_CHK": start=5, end=9
+Task "INV_CHK" (Rep2): start=5, end=9
+Task "INV_CHK" (Rep3): start=5, end=9
+Task "INV_CHK" (Rep4): start=5, end=9
+Task "SHIP_CALC": start=14, end=24
+Task "SHIP_CALC" (Rep2): start=14, end=24
+Task "SHIP_CALC" (Rep3): start=14, end=24
+Task "SHIP_CALC" (Rep4): start=24, end=34
+Task "ORD_CONF": start=34, end=42
+Task "CUST_NOTIF": start=42, end=46
+Task "CUST_NOTIF" (Rep2): start=42, end=46
+Task "WH_ALLOC": start=41, end=46
+Task "WH_ALLOC" (Rep2): start=41, end=46
+Task "WH_ALLOC" (Rep3): start=41, end=46
+Task "WH_ALLOC" (Rep4): start=41, end=46
+Task "QC_CHK": start=51, end=60
+Task "FINAL_PROC": start=47, end=53
+Task "FINAL_PROC" (Rep2): start=47, end=53
+Task "FINAL_PROC" (Rep3): start=47, end=53
+Task "FINAL_PROC" (Rep4): start=47, end=53
+
+
+Resource: 4;4;4;4;4;20;20;20;20;0;0;0;0;0;9;9;9;9;9;9;9;9;9;9;3;3;3;3;3;3;3;3;3;3;2;2;2;2;2;2;2;6;6;6;6;6;0;20;20;20;20;21;21;1;1;1;1;1;1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+
+
+=== RESOURCE UTILIZATION ===
+Time	resource Used	resource Available	Utilization (%)	Utilization (fraction)
+0	4	110	3%	0.36
+1	4	110	3%	0.36
+2	4	110	3%	0.36
+3	4	110	3%	0.36
+4	4	110	3%	0.36
+5	20	110	18%	0.181
+6	20	110	18%	0.181
+7	20	110	18%	0.181
+8	20	110	18%	0.181
+9	0	110	0%	0.0
+10	0	110	0%	0.0
+11	0	110	0%	0.0
+12	0	110	0%	0.0
+13	0	110	0%	0.0
+14	9	110	8%	0.81
+15	9	110	8%	0.81
+16	9	110	8%	0.81
+17	9	110	8%	0.81
+18	9	110	8%	0.81
+19	9	110	8%	0.81
+20	9	110	8%	0.81
+21	9	110	8%	0.81
+22	9	110	8%	0.81
+23	9	110	8%	0.81
+24	3	110	2%	0.27
+25	3	110	2%	0.27
+26	3	110	2%	0.27
+27	3	110	2%	0.27
+28	3	110	2%	0.27
+29	3	110	2%	0.27
+30	3	110	2%	0.27
+31	3	110	2%	0.27
+32	3	110	2%	0.27
+33	3	110	2%	0.27
+34	2	110	1%	0.18
+35	2	110	1%	0.18
+36	2	110	1%	0.18
+37	2	110	1%	0.18
+38	2	110	1%	0.18
+39	2	110	1%	0.18
+40	2	110	1%	0.18
+41	6	110	5%	0.54
+42	6	110	5%	0.54
+43	6	110	5%	0.54
+44	6	110	5%	0.54
+45	6	110	5%	0.54
+46	0	110	0%	0.0
+47	20	110	18%	0.181
+48	20	110	18%	0.181
+49	20	110	18%	0.181
+50	20	110	18%	0.181
+51	21	110	19%	0.190
+52	21	110	19%	0.190
+53	1	110	0%	0.9
+54	1	110	0%	0.9
+55	1	110	0%	0.9
+56	1	110	0%	0.9
+57	1	110	0%	0.9
+58	1	110	0%	0.9
+59	1	110	0%	0.9
+60	0	110	0%	0.0
+
+=== OVERALL RESOURCE STATISTICS ===
+resource Resource Summary:
+  Total Available: 110
+  Peak Usage: 21 (19%)
+  Average Usage: 6 (5%)
+  Time Window: [0..150]
+  Active Time Steps: 61
+
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/task8/8_task_manual_run2.dsl
+ DZN file generated: dzn_experiments/8_task_manual_run2.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 00:55:03.143063

@@ -1,0 +1,201 @@
+UnifyScript run for 16_task_manual_run5.dsl
+Started at: 2026-02-12 00:56:36.386932
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/task16/16_task_manual_run5.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/task16/16_task_manual_run5.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/task16/16_task_manual_run5.dsl
+ Output DZN file: dzn_experiments/16_task_manual_run5.dzn
+ Base name: 16_task_manual_run5
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/task16/16_task_manual_run5.dsl dzn_experiments/16_task_manual_run5.dzn
+   ==================================================
+Successfully converted DSL/task16/16_task_manual_run5.dsl to dzn_experiments/16_task_manual_run5.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/16_task_manual_run5.dzn
+   ==================================================
+Loading model: minizinc_model/modelAllOpsParameter.mzn
+Loading data: dzn_experiments/16_task_manual_run5.dzn
+Solving...
+
+Result:
+FEASIBLE
+Makespan end: 96
+
+Schedule:
+Task "PAY_VAL": start=0, end=5
+Task "INV_CHK": start=5, end=9
+Task "INV_CHK" (Rep2): start=5, end=9
+Task "INV_CHK" (Rep3): start=5, end=9
+Task "INV_CHK" (Rep4): start=5, end=9
+Task "SHIP_CALC": start=14, end=24
+Task "SHIP_CALC" (Rep2): start=14, end=24
+Task "SHIP_CALC" (Rep3): start=14, end=24
+Task "SHIP_CALC" (Rep4): start=24, end=34
+Task "ORD_CONF": start=34, end=42
+Task "CUST_NOTIF": start=19, end=23
+Task "WH_ALLOC": start=49, end=59
+Task "WH_ALLOC" (Rep2): start=49, end=59
+Task "WH_ALLOC" (Rep3): start=49, end=59
+Task "QC_CHK": start=61, end=71
+Task "FINAL_PROC": start=12, end=16
+Task "FINAL_PROC" (Rep2): start=16, end=20
+Task "FINAL_PROC" (Rep3): start=20, end=24
+Task "FINAL_PROC" (Rep4): start=24, end=28
+Task "TAX_CALC": start=47, end=53
+Task "TAX_CALC" (Rep2): start=47, end=53
+Task "TAX_CALC" (Rep3): start=47, end=53
+Task "DOC_GEN": start=41, end=47
+Task "COMP_CHK": start=67, end=70
+Task "COMP_CHK" (Rep2): start=67, end=70
+Task "ARCH_PROC": start=71, end=80
+Task "ARCH_PROC" (Rep2): start=71, end=80
+Task "ARCH_PROC" (Rep3): start=80, end=89
+Task "SEC_VAL": start=76, end=83
+Task "PERF_MON": start=81, end=84
+Task "PERF_MON" (Rep2): start=81, end=84
+Task "PERF_MON" (Rep3): start=81, end=84
+Task "PERF_MON" (Rep4): start=81, end=84
+Task "BCK_CREA": start=84, end=89
+Task "BCK_CREA" (Rep2): start=84, end=89
+Task "BCK_CREA" (Rep3): start=89, end=94
+Task "BCK_CREA" (Rep4): start=89, end=94
+Task "RPT_GEN": start=92, end=96
+
+
+Resource: 4;4;4;4;4;20;20;20;20;0;0;0;1;1;10;10;10;10;10;12;12;12;12;10;4;4;4;4;3;3;3;3;3;3;2;2;2;2;2;2;2;6;4;4;4;4;4;6;6;12;12;12;12;6;6;6;6;6;6;0;0;2;2;2;2;2;2;10;10;10;2;10;10;10;10;10;12;12;12;12;7;11;11;9;7;7;7;7;7;2;2;2;7;7;5;5;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+
+
+=== RESOURCE UTILIZATION ===
+Time	resource Used	resource Available	Utilization (%)	Utilization (fraction)
+0	4	150	2%	0.26
+1	4	150	2%	0.26
+2	4	150	2%	0.26
+3	4	150	2%	0.26
+4	4	150	2%	0.26
+5	20	150	13%	0.133
+6	20	150	13%	0.133
+7	20	150	13%	0.133
+8	20	150	13%	0.133
+9	0	150	0%	0.0
+10	0	150	0%	0.0
+11	0	150	0%	0.0
+12	1	150	0%	0.6
+13	1	150	0%	0.6
+14	10	150	6%	0.66
+15	10	150	6%	0.66
+16	10	150	6%	0.66
+17	10	150	6%	0.66
+18	10	150	6%	0.66
+19	12	150	8%	0.80
+20	12	150	8%	0.80
+21	12	150	8%	0.80
+22	12	150	8%	0.80
+23	10	150	6%	0.66
+24	4	150	2%	0.26
+25	4	150	2%	0.26
+26	4	150	2%	0.26
+27	4	150	2%	0.26
+28	3	150	2%	0.20
+29	3	150	2%	0.20
+30	3	150	2%	0.20
+31	3	150	2%	0.20
+32	3	150	2%	0.20
+33	3	150	2%	0.20
+34	2	150	1%	0.13
+35	2	150	1%	0.13
+36	2	150	1%	0.13
+37	2	150	1%	0.13
+38	2	150	1%	0.13
+39	2	150	1%	0.13
+40	2	150	1%	0.13
+41	6	150	4%	0.40
+42	4	150	2%	0.26
+43	4	150	2%	0.26
+44	4	150	2%	0.26
+45	4	150	2%	0.26
+46	4	150	2%	0.26
+47	6	150	4%	0.40
+48	6	150	4%	0.40
+49	12	150	8%	0.80
+50	12	150	8%	0.80
+51	12	150	8%	0.80
+52	12	150	8%	0.80
+53	6	150	4%	0.40
+54	6	150	4%	0.40
+55	6	150	4%	0.40
+56	6	150	4%	0.40
+57	6	150	4%	0.40
+58	6	150	4%	0.40
+59	0	150	0%	0.0
+60	0	150	0%	0.0
+61	2	150	1%	0.13
+62	2	150	1%	0.13
+63	2	150	1%	0.13
+64	2	150	1%	0.13
+65	2	150	1%	0.13
+66	2	150	1%	0.13
+67	10	150	6%	0.66
+68	10	150	6%	0.66
+69	10	150	6%	0.66
+70	2	150	1%	0.13
+71	10	150	6%	0.66
+72	10	150	6%	0.66
+73	10	150	6%	0.66
+74	10	150	6%	0.66
+75	10	150	6%	0.66
+76	12	150	8%	0.80
+77	12	150	8%	0.80
+78	12	150	8%	0.80
+79	12	150	8%	0.80
+80	7	150	4%	0.46
+81	11	150	7%	0.73
+82	11	150	7%	0.73
+83	9	150	6%	0.60
+84	7	150	4%	0.46
+85	7	150	4%	0.46
+86	7	150	4%	0.46
+87	7	150	4%	0.46
+88	7	150	4%	0.46
+89	2	150	1%	0.13
+90	2	150	1%	0.13
+91	2	150	1%	0.13
+92	7	150	4%	0.46
+93	7	150	4%	0.46
+94	5	150	3%	0.33
+95	5	150	3%	0.33
+96	0	150	0%	0.0
+
+=== OVERALL RESOURCE STATISTICS ===
+resource Resource Summary:
+  Total Available: 150
+  Peak Usage: 20 (13%)
+  Average Usage: 6 (4%)
+  Time Window: [0..270]
+  Active Time Steps: 97
+
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/task16/16_task_manual_run5.dsl
+ DZN file generated: dzn_experiments/16_task_manual_run5.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 00:56:39.393227

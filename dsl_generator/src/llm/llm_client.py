@@ -34,10 +34,11 @@ class LLMClient:
     
     def __init__(self,
                  provider: str = "openai",
-                 model: str = "gpt-5",
+                 model: str = "gpt-5.1",
                  api_key: Optional[str] = None,
-                 temperature: float = 0.3,
-                 max_tokens: int = 4000):
+                 temperature: float = 0,
+                 max_tokens: Optional[int] = None,
+                 seed: Optional[int] = None):
         """
         Inizializza il client LLM
         
@@ -46,12 +47,14 @@ class LLMClient:
             model: Nome del modello
             api_key: API key (se necessaria)
             temperature: Temperatura per la generazione
-            max_tokens: Massimo numero di token nella risposta
+            max_tokens: Massimo numero di token nella risposta (None = illimitato)
+            seed: Seed per riproducibilità (solo OpenAI)
         """
         self.provider = provider
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.seed = seed
         
         # Inizializza il client appropriato
         if provider == "openai":
@@ -59,25 +62,39 @@ class LLMClient:
             # Rileva automaticamente in base al nome del modello
             uses_completion_tokens = (
                 model.startswith("gpt-4o") or  # gpt-4o, gpt-4o-mini
-                model.startswith("gpt-5") or   # gpt-5, gpt-5.1, ecc.
-                model.startswith("o1") or      # o1-preview, o1-mini
-                model.startswith("o3")         # futuri modelli o3
+                model.startswith("gpt-5")     # gpt-5.x family
             )
             
             if uses_completion_tokens:
-                self.client = ChatOpenAI(
-                    model=model,
-                    openai_api_key=api_key,
-                    temperature=temperature,
-                    max_completion_tokens=max_tokens
-                )
+                # Parametri base
+                openai_params = {
+                    "model": model,
+                    "openai_api_key": api_key,
+                    "temperature": temperature
+                }
+                # Aggiungi max_completion_tokens solo se specificato
+                if max_tokens is not None:
+                    openai_params["max_completion_tokens"] = max_tokens
+                # Aggiungi seed se specificato
+                if seed is not None:
+                    openai_params["model_kwargs"] = {"seed": seed}
+                
+                self.client = ChatOpenAI(**openai_params)
             else:
-                self.client = ChatOpenAI(
-                    model=model,
-                    openai_api_key=api_key,
-                    temperature=temperature,
-                    max_tokens=max_tokens
-                )
+                # Parametri base
+                openai_params = {
+                    "model": model,
+                    "openai_api_key": api_key,
+                    "temperature": temperature
+                }
+                # Aggiungi max_tokens solo se specificato
+                if max_tokens is not None:
+                    openai_params["max_tokens"] = max_tokens
+                # Aggiungi seed se specificato
+                if seed is not None:
+                    openai_params["model_kwargs"] = {"seed": seed}
+                
+                self.client = ChatOpenAI(**openai_params)
             
         elif provider == "anthropic":
             if not HAS_ANTHROPIC:
@@ -89,7 +106,7 @@ class LLMClient:
                 model=model,
                 anthropic_api_key=api_key,
                 temperature=temperature,
-                max_tokens=max_tokens
+                max_tokens=max_tokens if max_tokens is not None else 4096  # Anthropic richiede max_tokens
             )
             
         elif provider == "ollama":
@@ -254,7 +271,8 @@ class LLMClient:
             'provider': self.provider,
             'model': self.model,
             'temperature': self.temperature,
-            'max_tokens': self.max_tokens
+            'max_tokens': self.max_tokens if self.max_tokens is not None else 'unlimited',
+            'seed': self.seed
         }
 
 
@@ -313,7 +331,7 @@ if __name__ == "__main__":
         provider="openai",
         model="gpt-3.5-turbo",
         api_key="your-api-key-here",
-        temperature=0.3
+        temperature=0.0
     )
     
     response = client.generate(

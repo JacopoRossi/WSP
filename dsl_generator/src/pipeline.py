@@ -36,19 +36,25 @@ class DSLGeneratorPipeline:
         Args:
             config_path: Path al file di configurazione
         """
-        print("🔧 Inizializzazione DSL Generator Pipeline...")
+        print("🔧 Initializing DSL Generator Pipeline...")
         
         # Carica variabili d'ambiente
         load_dotenv()
         
+        # Store config directory for resolving relative paths
+        config_path_obj = Path(config_path).resolve()
+        self.config_dir = config_path_obj.parent
+        # dsl_generator root is parent of config dir
+        self.root_dir = self.config_dir.parent
+        
         # Carica configurazione
-        self.config = self._load_config(config_path)
-        print(f"✓ Configurazione caricata da: {config_path}")
+        self.config = self._load_config(str(config_path_obj))
+        print(f"✓ Configuration loaded from: {config_path_obj}")
         
         # Inizializza componenti
         self._initialize_components()
         
-        print("✓ Pipeline inizializzata con successo!\n")
+        print("✓ Pipeline initialized successfully!\n")
     
     def _load_config(self, config_path: str) -> Dict:
         """Carica configurazione da file YAML"""
@@ -57,6 +63,27 @@ class DSLGeneratorPipeline:
         
         # Sostituisci variabili d'ambiente
         config = self._replace_env_vars(config)
+        
+        # Resolve prompt paths relative to config directory
+        if 'prompts' in config:
+            for key in ['system_prompt_path', 'extraction_prompt_path', 'generation_prompt_path']:
+                if key in config['prompts']:
+                    # Resolve relative to config directory
+                    prompt_path = Path(config['prompts'][key])
+                    if not prompt_path.is_absolute():
+                        config['prompts'][key] = str(self.config_dir / prompt_path)
+        
+        # Resolve vector store path relative to dsl_generator root
+        if 'rag' in config and 'vector_store_path' in config['rag']:
+            vector_store_path = Path(config['rag']['vector_store_path'])
+            if not vector_store_path.is_absolute():
+                config['rag']['vector_store_path'] = str(self.root_dir / vector_store_path)
+        
+        # Resolve output directory relative to dsl_generator root
+        if 'pipeline' in config and 'output_dir' in config['pipeline']:
+            output_dir = Path(config['pipeline']['output_dir'])
+            if not output_dir.is_absolute():
+                config['pipeline']['output_dir'] = str(self.root_dir / output_dir)
         
         return config
     
@@ -77,7 +104,7 @@ class DSLGeneratorPipeline:
     def _initialize_components(self):
         """Inizializza tutti i componenti della pipeline"""
         # 1. Embedding Generator
-        print("  📊 Inizializzazione Embedding Generator...")
+        print("  📊 Initializing Embedding Generator...")
         self.embedding_generator = EmbeddingGenerator(
             provider=self.config['rag']['embedding_provider'],
             model=self.config['rag']['embedding_model'],
@@ -85,7 +112,7 @@ class DSLGeneratorPipeline:
         )
         
         # 2. Vector Store
-        print("  🗄️  Inizializzazione Vector Store...")
+        print("  🗄️  Initializing Vector Store...")
         self.vector_store = VectorStore(
             store_path=self.config['rag']['vector_store_path'],
             collection_name=self.config['rag']['collection_name'],
@@ -93,24 +120,34 @@ class DSLGeneratorPipeline:
         )
         
         # 3. Document Loader
-        print("  📚 Inizializzazione Document Loader...")
+        print("  📚 Initializing Document Loader...")
+        chunk_size = self.config['rag']['chunk_size']
+        chunk_overlap = self.config['rag']['chunk_overlap']
         self.document_loader = DocumentLoader(
-            chunk_size=self.config['rag']['chunk_size'],
-            chunk_overlap=self.config['rag']['chunk_overlap']
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap
         )
+        print(f"     → chunk_size: {chunk_size}, chunk_overlap: {chunk_overlap}")
         
         # 4. LLM Client
-        print("  🤖 Inizializzazione LLM Client...")
+        print("  🤖 Initializing LLM Client...")
+        llm_model = self.config['llm']['model']
+        llm_temp = self.config['llm']['temperature']
+        llm_max_tokens = self.config['llm'].get('max_tokens')
+        llm_seed = self.config['llm'].get('seed')
         self.llm_client = LLMClient(
             provider=self.config['llm']['provider'],
-            model=self.config['llm']['model'],
+            model=llm_model,
             api_key=self.config['llm'].get('api_key'),
-            temperature=self.config['llm']['temperature'],
-            max_tokens=self.config['llm']['max_tokens']
+            temperature=llm_temp,
+            max_tokens=llm_max_tokens,
+            seed=llm_seed
         )
+        max_tokens_str = llm_max_tokens if llm_max_tokens is not None else 'unlimited'
+        print(f"     → model: {llm_model}, temperature: {llm_temp}, max_tokens: {max_tokens_str}, seed: {llm_seed}")
         
         # 5. Prompt Builder
-        print("  📝 Inizializzazione Prompt Builder...")
+        print("  📝 Initializing Prompt Builder...")
         self.prompt_builder = PromptBuilder(
             system_prompt_path=self.config['prompts']['system_prompt_path'],
             extraction_prompt_path=self.config['prompts']['extraction_prompt_path'],
@@ -118,18 +155,23 @@ class DSLGeneratorPipeline:
         )
         
         # 6. DSL Validator
-        print("  ✅ Inizializzazione DSL Validator...")
+        print("  ✅ Initializing DSL Validator...")
         self.validator = DSLValidator(
             strict_mode=self.config['dsl'].get('strict_mode', False)
         )
         
         # 7. DSL Generator
-        print("  ⚙️  Inizializzazione DSL Generator...")
+        print("  ⚙️  Initializing DSL Generator...")
+        rag_top_k = self.config['rag']['top_k']
+        rag_threshold = self.config['rag']['similarity_threshold']
+        print(f"     → RAG: top_k={rag_top_k}, similarity_threshold={rag_threshold}")
         self.dsl_generator = DSLGenerator(
             llm_client=self.llm_client,
             prompt_builder=self.prompt_builder,
             vector_store=self.vector_store,
-            validator=self.validator
+            validator=self.validator,
+            chunk_size=self.config['rag']['chunk_size'],
+            chunk_overlap=self.config['rag']['chunk_overlap']
         )
     
     def index_documentation(self, 
@@ -145,11 +187,11 @@ class DSLGeneratorPipeline:
         Returns:
             Numero di documenti indicizzati
         """
-        print(f"\n📑 Indicizzazione documentazione da: {documentation_path}")
+        print(f"\n📑 Indexing documentation from: {documentation_path}")
         
         # Reset collection se richiesto
         if reset_collection:
-            print("  🔄 Reset collection...")
+            print("  🔄 Resetting collection...")
             self.vector_store.reset_collection()
         
         # Carica documenti
@@ -160,21 +202,23 @@ class DSLGeneratorPipeline:
         elif path.is_dir():
             documents = self.document_loader.load_directory(str(path))
         else:
-            raise ValueError(f"Path non valido: {documentation_path}")
+            raise ValueError(f"Invalid path: {documentation_path}")
         
-        print(f"  ✓ Caricati {len(documents)} chunks")
+        print(f"  ✓ Loaded {len(documents)} chunks")
         
         # Aggiungi al vector store
         count = self.vector_store.add_documents(documents, show_progress=True)
         
-        print(f"✓ Indicizzazione completata: {count} documenti\n")
+        print(f"✓ Indexing completed: {count} documents\n")
         
         return count
     
     def generate_dsl(self,
                     documentation_path: str,
                     output_path: Optional[str] = None,
-                    use_indexed: bool = True) -> Dict:
+                    use_indexed: bool = True,
+                    check_completeness: bool = True,
+                    interactive_completion: bool = True) -> Dict:
         """
         Genera DSL da documentazione
         
@@ -183,17 +227,50 @@ class DSLGeneratorPipeline:
             output_path: Path per salvare il DSL (opzionale)
             use_indexed: Se True, usa documentazione già indicizzata per RAG.
                         Se il vector store è vuoto, indicizza automaticamente il file di input.
+            check_completeness: Se True, verifica che la documentazione contenga
+                              tutte le informazioni necessarie
+            interactive_completion: Se True e mancano informazioni, chiede all'utente
+                                   di fornirle interattivamente
             
         Returns:
             Dizionario con risultati
         """
         print(f"\n{'='*60}")
-        print(f"🚀 GENERAZIONE DSL")
+        print(f"🚀 DSL GENERATION")
         print(f"{'='*60}\n")
         
+        # Verifica se il vector store è vuoto
+        if self.vector_store.is_empty():
+            print("⚠️  Vector store is empty - no DSL data available")
+            print("📑 Documentation indexing is required before proceeding\n")
+        
         # SEMPRE resetta e reindicizza il file di input per garantire dati freschi
-        print("📑 Reset vector store e indicizzazione del file di input...")
+        print("📑 Resetting vector store and indexing input file...")
         self.index_documentation(documentation_path, reset_collection=True)
+        
+        # Verifica completezza delle informazioni (se richiesto)
+        if check_completeness:
+            from .dsl.interactive_completer import InteractiveCompleter
+            
+            completer = InteractiveCompleter(self)
+            is_complete, additional_data = completer.check_and_request_missing_info(
+                documentation_path=documentation_path,
+                min_confidence=0.3,
+                interactive=interactive_completion
+            )
+            
+            # Se l'utente ha annullato, termina
+            if not is_complete and interactive_completion:
+                return {
+                    'success': False,
+                    'error': 'Generation cancelled: missing information',
+                    'validation': {'is_valid': False, 'errors': ['Missing information'], 'warnings': [], 'attempts': 0}
+                }
+            
+            # Se non è completo ma non siamo in modalità interattiva, avvisa
+            if not is_complete and not interactive_completion:
+                print("\n  WARNING: Documentation ") #may not contain all necessary information
+                print("   Generated DSL may be incomplete or invalid\n")
         
         # Determina output path
         if output_path is None:
@@ -211,14 +288,14 @@ class DSLGeneratorPipeline:
         
         # Stampa riepilogo
         print(f"\n{'='*60}")
-        print(f"📊 RIEPILOGO GENERAZIONE")
+        print(f"📊 GENERATION SUMMARY")
         print(f"{'='*60}")
-        print(f"Documentazione: {documentation_path}")
+        print(f"Documentation: {documentation_path}")
         print(f"Output: {output_path}")
-        print(f"Valido: {'✓ Sì' if result['validation']['is_valid'] else '✗ No'}")
-        print(f"Errori: {len(result['validation']['errors'])}")
-        print(f"Warning: {len(result['validation']['warnings'])}")
-        print(f"Tentativi: {result['validation']['attempts']}")
+        print(f"Valid: {'✓ Yes' if result['validation']['is_valid'] else '✗ No'}")
+        print(f"Errors: {len(result['validation']['errors'])}")
+        print(f"Warnings: {len(result['validation']['warnings'])}")
+        print(f"Attempts: {result['validation']['attempts']}")
         print(f"{'='*60}\n")
         
         return result
@@ -239,18 +316,18 @@ class DSLGeneratorPipeline:
             Lista di risultati
         """
         print(f"\n{'='*60}")
-        print(f"🔄 GENERAZIONE BATCH")
+        print(f"🔄 BATCH GENERATION")
         print(f"{'='*60}\n")
         
         # Indicizza tutta la documentazione
-        print("📑 Fase 1: Indicizzazione documentazione...")
+        print("📑 Phase 1: Indexing documentation...")
         self.index_documentation(input_dir, reset_collection=True)
         
         # Trova tutti i file
         input_path = Path(input_dir)
         files = list(input_path.glob(file_pattern))
         
-        print(f"\n📄 Fase 2: Generazione DSL per {len(files)} file...\n")
+        print(f"\n📄 Phase 2: Generating DSL for {len(files)} files...\n")
         
         # Determina output directory
         if output_dir is None:
@@ -264,7 +341,7 @@ class DSLGeneratorPipeline:
         results = []
         
         for i, file_path in enumerate(files, 1):
-            print(f"\n[{i}/{len(files)}] Processando: {file_path.name}")
+            print(f"\n[{i}/{len(files)}] Processing: {file_path.name}")
             print("-" * 60)
             
             output_path = output_dir / f"{file_path.stem}_generated.dsl"
@@ -281,7 +358,7 @@ class DSLGeneratorPipeline:
                 results.append(result)
                 
             except Exception as e:
-                print(f"❌ Errore: {e}")
+                print(f"❌ Error: {e}")
                 results.append({
                     'input_file': str(file_path),
                     'error': str(e),
@@ -290,15 +367,15 @@ class DSLGeneratorPipeline:
         
         # Stampa riepilogo finale
         print(f"\n{'='*60}")
-        print(f"📊 RIEPILOGO BATCH")
+        print(f"📊 BATCH SUMMARY")
         print(f"{'='*60}")
-        print(f"File processati: {len(results)}")
+        print(f"Files processed: {len(results)}")
         
         valid_count = sum(1 for r in results if r['validation']['is_valid'])
-        print(f"DSL validi: {valid_count}/{len(results)}")
+        print(f"Valid DSLs: {valid_count}/{len(results)}")
         
         error_count = sum(1 for r in results if 'error' in r)
-        print(f"Errori: {error_count}")
+        print(f"Errors: {error_count}")
         print(f"{'='*60}\n")
         
         return results
@@ -336,23 +413,23 @@ if __name__ == "__main__":
     # Esegui comando
     if args.command == "index":
         if not args.input:
-            print("❌ Errore: --input richiesto per il comando 'index'")
+            print("❌ Error: --input required for 'index' command")
         else:
             pipeline.index_documentation(args.input, reset_collection=args.reset)
     
     elif args.command == "generate":
         if not args.input:
-            print("❌ Errore: --input richiesto per il comando 'generate'")
+            print("❌ Error: --input required for 'generate' command")
         else:
             pipeline.generate_dsl(args.input, output_path=args.output)
     
     elif args.command == "generate-batch":
         if not args.input:
-            print("❌ Errore: --input richiesto per il comando 'generate-batch'")
+            print("❌ Error: --input required for 'generate-batch' command")
         else:
             pipeline.generate_batch(args.input, output_dir=args.output, file_pattern=args.pattern)
     
     elif args.command == "stats":
         stats = pipeline.get_stats()
-        print("\n📊 Statistiche Pipeline:")
+        print("\n📊 Pipeline Statistics:")
         print(yaml.dump(stats, default_flow_style=False))

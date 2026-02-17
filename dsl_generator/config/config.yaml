@@ -5,9 +5,10 @@ llm:
   provider: "openai"  # Options: openai, anthropic, ollama
   model: "gpt-5.1"  # Modello efficiente e veloce (gpt-4o-mini, gpt-4o, gpt-3.5-turbo)
   api_key: "${OPENAI_API_KEY}"  # Set via environment variable
-  temperature: 0.2
-  max_tokens: 8000  # RADDOPPIATO: 4000 → 8000 per DSL molto complessi
+  temperature: 0.0
+  # max_tokens: 20000  # Commentato: usa il massimo disponibile del modello senza limiti artificiali
   encoding: "cl100k_base"  # Encoding per il tokenizer
+  seed: 42  # 
   
   # Alternative configurations
   # For Anthropic:
@@ -24,16 +25,16 @@ llm:
 rag:
   # Embedding model
   embedding_provider: "openai"  # Options: openai, huggingface, sentence-transformers
-  embedding_model: "text-embedding-3-small"
-  embedding_dimension: 1536
+  embedding_model: "text-embedding-3-large"
+  embedding_dimension: 3072
   
   # For HuggingFace embeddings:
   # embedding_provider: "huggingface"
   # embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
   
   # Chunking strategy
-  chunk_size: 4000  # RADDOPPIATO: 2000 → 4000
-  chunk_overlap: 800  # RADDOPPIATO: 400 → 800
+  chunk_size: 1000  # AUMENTATO: 1500 → 2500 per evitare di spezzare tabelle di constraint
+  chunk_overlap: 350  # AUMENTATO: 300 → 600 (24% overlap) per catturare constraint ai bordi
   
   # Vector store
   vector_store: "chromadb"  # Options: chromadb, faiss
@@ -41,8 +42,8 @@ rag:
   collection_name: "dsl_documentation"
   
   # Retrieval
-  top_k: 20  # RADDOPPIATO: 10 → 20
-  similarity_threshold: 0.3  # Ulteriormente ridotto per massima copertura
+  top_k: 60  # AUMENTATO: 40 → 60 per recuperare più contesto e tutti i constraint
+  similarity_threshold: 0.15  # Ulteriormente ridotto per massima copertura di constraint
   
   # Document processing
   supported_formats:
@@ -122,10 +123,10 @@ pipeline:
 
 # Prompt Configuration
 prompts:
-  system_prompt_path: "config/prompts/system_prompt.txt"
-  extraction_prompt_path: "config/prompts/extraction_prompt.txt"
-  generation_prompt_path: "config/prompts/generation_prompt.txt"
+  system_prompt_path: "prompts/system_prompt.txt"
+  extraction_prompt_path: "prompts/extraction_prompt.txt"
+  generation_prompt_path: "prompts/generation_prompt.txt"
   
   # Prompt parameters
   include_examples: true
-  max_context_length: 8000
+  max_context_length: 32000  #

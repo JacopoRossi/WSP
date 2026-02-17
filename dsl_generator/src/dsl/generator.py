@@ -19,7 +19,9 @@ class DSLGenerator:
                  llm_client: LLMClient,
                  prompt_builder: PromptBuilder,
                  vector_store: Optional[VectorStore] = None,
-                 validator: Optional[DSLValidator] = None):
+                 validator: Optional[DSLValidator] = None,
+                 chunk_size: int = 1500,
+                 chunk_overlap: int = 300):
         """
         Inizializza il generatore DSL
         
@@ -28,11 +30,15 @@ class DSLGenerator:
             prompt_builder: Builder per i prompt
             vector_store: Vector store per RAG (opzionale)
             validator: Validatore DSL (opzionale)
+            chunk_size: Dimensione dei chunk per DocumentLoader
+            chunk_overlap: Overlap tra chunk per DocumentLoader
         """
         self.llm_client = llm_client
         self.prompt_builder = prompt_builder
         self.vector_store = vector_store
         self.validator = validator or DSLValidator()
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
         
         self.use_rag = vector_store is not None
     
@@ -49,35 +55,38 @@ class DSLGenerator:
         Returns:
             Dizionario con DSL generato e metadata
         """
-        print("🚀 Avvio generazione DSL...")
+        print("🚀 Starting DSL generation...")
         
         # Step 1: Estrazione informazioni
-        print("\n📖 Step 1: Estrazione informazioni dalla documentazione...")
+        print("\n📖 Step 1: Extracting information from documentation...")
         extracted_info = self._extract_information(documentation)
-        print(f"✓ Informazioni estratte ({len(extracted_info)} caratteri)")
+        print(f"✓ Information extracted ({len(extracted_info)} characters)")
+        
+        # Step 1.5: Validazione post-estrazione (verifica campi critici)
+        self._validate_extracted_info(extracted_info)
         
         # Step 2: Generazione DSL
-        print("\n⚙️  Step 2: Generazione DSL...")
+        print("\n⚙️  Step 2: Generating DSL...")
         dsl_content = self._generate_dsl(extracted_info)
-        print(f"✓ DSL generato ({len(dsl_content)} caratteri)")
+        print(f"✓ DSL generated ({len(dsl_content)} characters)")
         
         # Step 3: Validazione e correzione
-        print("\n✅ Step 3: Validazione DSL...")
+        print("\n✅ Step 3: Validating DSL...")
         dsl_content, validation_result = self._validate_and_fix(
             dsl_content,
             max_retries=max_retries
         )
         
         if validation_result['is_valid']:
-            print("✓ DSL valido!")
+            print("✓ Valid DSL!")
         else:
-            print(f"⚠️  DSL con {len(validation_result['errors'])} errori")
+            print(f"⚠️  DSL with {len(validation_result['errors'])} errors")
         
         # Parse YAML
         try:
             dsl_data = yaml.safe_load(dsl_content)
         except yaml.YAMLError as e:
-            print(f"❌ Errore nel parsing YAML: {e}")
+            print(f"❌ YAML parsing error: {e}")
             dsl_data = None
         
         return {
@@ -92,27 +101,29 @@ class DSLGenerator:
         # Ottieni contesto RAG se disponibile
         rag_context = ""
         if self.use_rag:
-            print("  🔍 Recupero contesto rilevante con RAG...")
+            print("  🔍 Retrieving relevant context with RAG...")
             queries = [
                 "global parameters system configuration time window resources",
                 "services tasks list complete all tasks",
-                "start constraints precedence dependencies all relationships",
+                "start constraints precedence dependencies all relationships complete list",
                 "task properties duration resources repetition",
-                "temporal constraints delay wait_all complete list"
+                "temporal constraints delay wait_all complete list all constraints",
+                "task dependencies from to delay wait precedence relationships",
+                "constraints between tasks scheduling dependencies all"
             ]
             
             contexts = []
             for query in queries:
                 ctx = self.vector_store.get_relevant_context(
                     query,
-                    top_k=20,  # RADDOPPIATO: 10 → 20
-                    max_chars=16000  # RADDOPPIATO: 8000 → 16000
+                    top_k=60,  # AUMENTATO: 40 → 60 per recuperare più constraint
+                    max_chars=32000  # AUMENTATO: 16000 → 32000 per supportare 100+ constraint
                 )
                 if ctx:
                     contexts.append(ctx)
             
             rag_context = "\n\n".join(contexts)
-            print(f"  ✓ Contesto RAG recuperato ({len(rag_context)} caratteri)")
+            print(f"  ✓ RAG context retrieved ({len(rag_context)} characters)")
         
         # Costruisci prompt di estrazione
         extraction_prompt = self.prompt_builder.build_extraction_prompt(
@@ -130,6 +141,37 @@ class DSLGenerator:
         )
         
         return response.content
+    
+    def _validate_extracted_info(self, extracted_info: str):
+        """
+        Valida che le informazioni estratte contengano i campi critici
+        
+        Args:
+            extracted_info: Informazioni estratte da validare
+        """
+        # Converti in lowercase per il check case-insensitive
+        info_lower = extracted_info.lower()
+        
+        # Lista di campi critici da verificare
+        critical_fields = {
+            'name': ['name:', 'system name', 'mission', 'spacecraft'],
+            'h_start': ['h_start', 'time window start', 'horizon start'],
+            'h_end': ['h_end', 'time window end', 'horizon end'],
+            'r_max': ['r_max', 'maximum resource', 'max resource'],
+            'tasks_set': ['tasks_set', 'task set', 'tasks list', 'task ids']
+        }
+        
+        missing_fields = []
+        
+        for field, keywords in critical_fields.items():
+            # Verifica se almeno uno dei keyword è presente
+            if not any(keyword in info_lower for keyword in keywords):
+                missing_fields.append(field)
+        
+        # Avvisa se mancano campi (ma non blocca)
+        if missing_fields:
+            print(f"   WARNING: : {', '.join(missing_fields)}") #Possible missing fields in extraction
+            print(f"     This may cause validation errors later")
     
     def _generate_dsl(self, extracted_info: str) -> str:
         """Genera DSL YAML dalle informazioni estratte"""
@@ -187,14 +229,14 @@ class DSLGenerator:
             
             if is_valid:
                 if warnings:
-                    print(f"  ⚠️  {len(warnings)} warning(s)")
+                    print(f"   {len(warnings)} warning(s)")
                     for warning in warnings[:3]:  # Mostra primi 3
                         print(f"     - {warning}")
                 return current_content, validation_result
             
             # Se non valido e ci sono ancora tentativi
             if attempt < max_retries:
-                print(f"  ❌ Trovati {len(errors)} errori, tentativo correzione {attempt + 1}/{max_retries}...")
+                print(f"  ❌ Found {len(errors)} errors, correction attempt {attempt + 1}/{max_retries}...")
                 
                 # Mostra primi errori
                 for error in errors[:3]:
@@ -204,10 +246,10 @@ class DSLGenerator:
                 try:
                     current_content = self._fix_errors(current_content, errors)
                 except Exception as e:
-                    print(f"  ⚠️  Errore nella correzione: {e}")
+                    print(f"  ⚠️  Error in correction: {e}")
                     break
             else:
-                print(f"  ❌ Validazione fallita dopo {max_retries} tentativi")
+                print(f"  ❌ Validation failed after {max_retries} attempts")
                 for error in errors:
                     print(f"     - {error}")
         
@@ -254,7 +296,7 @@ class DSLGenerator:
         with open(path, 'w', encoding='utf-8') as f:
             f.write(dsl_content)
         
-        print(f"\n💾 DSL salvato in: {output_path}")
+        print(f"\n💾 DSL saved to: {output_path}")
     
     def generate_and_save(self,
                          documentation_path: str,
@@ -272,7 +314,7 @@ class DSLGenerator:
             Dizionario con risultati
         """
         # Carica documentazione
-        print(f"📄 Caricamento documentazione da: {documentation_path}")
+        print(f"📄 Loading documentation from: {documentation_path}")
         
         doc_path = Path(documentation_path)
         file_extension = doc_path.suffix.lower()
@@ -283,7 +325,10 @@ class DSLGenerator:
                 documentation = f.read()
         # Per PDF e altri formati binari, usa DocumentLoader
         elif file_extension in ['.pdf', '.docx']:
-            loader = DocumentLoader()
+            loader = DocumentLoader(
+                chunk_size=self.chunk_size,
+                chunk_overlap=self.chunk_overlap
+            )
             docs = loader.load_document(documentation_path)
             # Concatena tutti i chunks
             documentation = "\n\n".join(doc.content for doc in docs)
@@ -294,11 +339,14 @@ class DSLGenerator:
                     documentation = f.read()
             except UnicodeDecodeError:
                 # Fallback: usa DocumentLoader
-                loader = DocumentLoader()
+                loader = DocumentLoader(
+                    chunk_size=self.chunk_size,
+                    chunk_overlap=self.chunk_overlap
+                )
                 docs = loader.load_document(documentation_path)
                 documentation = "\n\n".join(doc.content for doc in docs)
         
-        print(f"✓ Documentazione caricata ({len(documentation)} caratteri)")
+        print(f"✓ Documentation loaded ({len(documentation)} characters)")
         
         # Genera DSL
         result = self.generate_from_documentation(
@@ -316,7 +364,7 @@ class DSLGenerator:
 if __name__ == "__main__":
     # Test del generatore (richiede configurazione LLM)
     print("Test DSL Generator\n")
-    print("NOTA: Questo test richiede una configurazione LLM valida.")
-    print("Per un test completo, usa lo script examples/example_usage.py\n")
+    print("NOTE: This test requires a valid LLM configuration.")
+    print("For a complete test, use the script examples/example_usage.py\n")
     
-    print("✓ Modulo DSL Generator pronto per l'uso")
+    print("✓ DSL Generator module ready to use")

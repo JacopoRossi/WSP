@@ -163,7 +163,7 @@ def example_5_validation_only():
             print(f"  - {error}")
     
     if warnings:
-        print("\n⚠️  Warning:")
+        print("\n  Warning:")
         for warning in warnings[:5]:  # Mostra primi 5
             print(f"  - {warning}")
 

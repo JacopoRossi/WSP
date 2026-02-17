@@ -1,0 +1,1625 @@
+{
+  "experiment": {
+    "data_file": "dzn_experiments/44_task_manual_run10.dzn",
+    "model_file": "minizinc_model/modelAllOpsParameter.mzn"
+  },
+  "result": {
+    "status": "FEASIBLE",
+    "makespan_end": 148
+  },
+  "schedule": [
+    {
+      "task": "PAY_VAL",
+      "repetition": 1,
+      "start": 0,
+      "end": 5
+    },
+    {
+      "task": "INV_CHK",
+      "repetition": 1,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "INV_CHK",
+      "repetition": 2,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "INV_CHK",
+      "repetition": 3,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "INV_CHK",
+      "repetition": 4,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "SHIP_CALC",
+      "repetition": 1,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "SHIP_CALC",
+      "repetition": 2,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "SHIP_CALC",
+      "repetition": 3,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "SHIP_CALC",
+      "repetition": 4,
+      "start": 24,
+      "end": 34
+    },
+    {
+      "task": "ORD_CONF",
+      "repetition": 1,
+      "start": 34,
+      "end": 42
+    },
+    {
+      "task": "CUST_NOTIF",
+      "repetition": 1,
+      "start": 46,
+      "end": 53
+    },
+    {
+      "task": "CUST_NOTIF",
+      "repetition": 2,
+      "start": 46,
+      "end": 53
+    },
+    {
+      "task": "WH_ALLOC",
+      "repetition": 1,
+      "start": 10,
+      "end": 16
+    },
+    {
+      "task": "WH_ALLOC",
+      "repetition": 2,
+      "start": 10,
+      "end": 16
+    },
+    {
+      "task": "WH_ALLOC",
+      "repetition": 3,
+      "start": 10,
+      "end": 16
+    },
+    {
+      "task": "WH_ALLOC",
+      "repetition": 4,
+      "start": 16,
+      "end": 22
+    },
+    {
+      "task": "QC_CHK",
+      "repetition": 1,
+      "start": 30,
+      "end": 35
+    },
+    {
+      "task": "QC_CHK",
+      "repetition": 2,
+      "start": 30,
+      "end": 35
+    },
+    {
+      "task": "QC_CHK",
+      "repetition": 3,
+      "start": 30,
+      "end": 35
+    },
+    {
+      "task": "FINAL_PROC",
+      "repetition": 1,
+      "start": 37,
+      "end": 46
+    },
+    {
+      "task": "FINAL_PROC",
+      "repetition": 2,
+      "start": 38,
+      "end": 47
+    },
+    {
+      "task": "FINAL_PROC",
+      "repetition": 3,
+      "start": 39,
+      "end": 48
+    },
+    {
+      "task": "TAX_CALC",
+      "repetition": 1,
+      "start": 50,
+      "end": 56
+    },
+    {
+      "task": "DOC_GEN",
+      "repetition": 1,
+      "start": 25,
+      "end": 32
+    },
+    {
+      "task": "DOC_GEN",
+      "repetition": 2,
+      "start": 25,
+      "end": 32
+    },
+    {
+      "task": "DOC_GEN",
+      "repetition": 3,
+      "start": 25,
+      "end": 32
+    },
+    {
+      "task": "DOC_GEN",
+      "repetition": 4,
+      "start": 32,
+      "end": 39
+    },
+    {
+      "task": "COMP_CHK",
+      "repetition": 1,
+      "start": 56,
+      "end": 60
+    },
+    {
+      "task": "ARCH_PROC",
+      "repetition": 1,
+      "start": 20,
+      "end": 25
+    },
+    {
+      "task": "SEC_VAL",
+      "repetition": 1,
+      "start": 63,
+      "end": 69
+    },
+    {
+      "task": "SEC_VAL",
+      "repetition": 2,
+      "start": 63,
+      "end": 69
+    },
+    {
+      "task": "SEC_VAL",
+      "repetition": 3,
+      "start": 63,
+      "end": 69
+    },
+    {
+      "task": "PERF_MON",
+      "repetition": 1,
+      "start": 62,
+      "end": 69
+    },
+    {
+      "task": "PERF_MON",
+      "repetition": 2,
+      "start": 69,
+      "end": 76
+    },
+    {
+      "task": "BCK_CREA",
+      "repetition": 1,
+      "start": 55,
+      "end": 65
+    },
+    {
+      "task": "BCK_CREA",
+      "repetition": 2,
+      "start": 57,
+      "end": 67
+    },
+    {
+      "task": "BCK_CREA",
+      "repetition": 3,
+      "start": 59,
+      "end": 69
+    },
+    {
+      "task": "BCK_CREA",
+      "repetition": 4,
+      "start": 61,
+      "end": 71
+    },
+    {
+      "task": "RPT_GEN",
+      "repetition": 1,
+      "start": 62,
+      "end": 68
+    },
+    {
+      "task": "DATA_ENCR",
+      "repetition": 1,
+      "start": 66,
+      "end": 73
+    },
+    {
+      "task": "AUD_TRL",
+      "repetition": 1,
+      "start": 72,
+      "end": 78
+    },
+    {
+      "task": "AUD_TRL",
+      "repetition": 2,
+      "start": 86,
+      "end": 92
+    },
+    {
+      "task": "AUD_TRL",
+      "repetition": 3,
+      "start": 100,
+      "end": 106
+    },
+    {
+      "task": "SYS_CLN",
+      "repetition": 1,
+      "start": 81,
+      "end": 89
+    },
+    {
+      "task": "FINAL_VAL",
+      "repetition": 1,
+      "start": 61,
+      "end": 66
+    },
+    {
+      "task": "RISK_ASMT",
+      "repetition": 1,
+      "start": 78,
+      "end": 85
+    },
+    {
+      "task": "FRD_DET",
+      "repetition": 1,
+      "start": 75,
+      "end": 79
+    },
+    {
+      "task": "FRD_DET",
+      "repetition": 2,
+      "start": 75,
+      "end": 79
+    },
+    {
+      "task": "FRD_DET",
+      "repetition": 3,
+      "start": 75,
+      "end": 79
+    },
+    {
+      "task": "FRD_DET",
+      "repetition": 4,
+      "start": 75,
+      "end": 79
+    },
+    {
+      "task": "CUR_CONV",
+      "repetition": 1,
+      "start": 71,
+      "end": 80
+    },
+    {
+      "task": "CUR_CONV",
+      "repetition": 2,
+      "start": 80,
+      "end": 89
+    },
+    {
+      "task": "CUR_CONV",
+      "repetition": 3,
+      "start": 89,
+      "end": 98
+    },
+    {
+      "task": "PRC_OPT",
+      "repetition": 1,
+      "start": 65,
+      "end": 68
+    },
+    {
+      "task": "LOY_PROC",
+      "repetition": 1,
+      "start": 77,
+      "end": 85
+    },
+    {
+      "task": "RET_HDL",
+      "repetition": 1,
+      "start": 116,
+      "end": 122
+    },
+    {
+      "task": "RET_HDL",
+      "repetition": 2,
+      "start": 116,
+      "end": 122
+    },
+    {
+      "task": "REF_PROC",
+      "repetition": 1,
+      "start": 69,
+      "end": 73
+    },
+    {
+      "task": "REF_PROC",
+      "repetition": 2,
+      "start": 78,
+      "end": 82
+    },
+    {
+      "task": "REF_PROC",
+      "repetition": 3,
+      "start": 87,
+      "end": 91
+    },
+    {
+      "task": "REF_PROC",
+      "repetition": 4,
+      "start": 96,
+      "end": 100
+    },
+    {
+      "task": "PRD_REC",
+      "repetition": 1,
+      "start": 86,
+      "end": 90
+    },
+    {
+      "task": "PRD_REC",
+      "repetition": 2,
+      "start": 86,
+      "end": 90
+    },
+    {
+      "task": "ANLY_UPD",
+      "repetition": 1,
+      "start": 81,
+      "end": 89
+    },
+    {
+      "task": "CACHE_REFR",
+      "repetition": 1,
+      "start": 91,
+      "end": 99
+    },
+    {
+      "task": "LOG_PROC",
+      "repetition": 1,
+      "start": 107,
+      "end": 113
+    },
+    {
+      "task": "ERR_HDL",
+      "repetition": 1,
+      "start": 121,
+      "end": 126
+    },
+    {
+      "task": "ERR_HDL",
+      "repetition": 2,
+      "start": 122,
+      "end": 127
+    },
+    {
+      "task": "LOAD_BAL",
+      "repetition": 1,
+      "start": 130,
+      "end": 137
+    },
+    {
+      "task": "LOAD_BAL",
+      "repetition": 2,
+      "start": 130,
+      "end": 137
+    },
+    {
+      "task": "LOAD_BAL",
+      "repetition": 3,
+      "start": 130,
+      "end": 137
+    },
+    {
+      "task": "LOAD_BAL",
+      "repetition": 4,
+      "start": 130,
+      "end": 137
+    },
+    {
+      "task": "DB_SYNC",
+      "repetition": 1,
+      "start": 85,
+      "end": 88
+    },
+    {
+      "task": "API_VAL",
+      "repetition": 1,
+      "start": 101,
+      "end": 110
+    },
+    {
+      "task": "API_VAL",
+      "repetition": 2,
+      "start": 101,
+      "end": 110
+    },
+    {
+      "task": "API_VAL",
+      "repetition": 3,
+      "start": 101,
+      "end": 110
+    },
+    {
+      "task": "SESS_MGT",
+      "repetition": 1,
+      "start": 63,
+      "end": 70
+    },
+    {
+      "task": "EMAIL_DISP",
+      "repetition": 1,
+      "start": 141,
+      "end": 148
+    },
+    {
+      "task": "SMS_NOTIF",
+      "repetition": 1,
+      "start": 96,
+      "end": 101
+    },
+    {
+      "task": "PUSH_NOTIF",
+      "repetition": 1,
+      "start": 116,
+      "end": 120
+    },
+    {
+      "task": "PUSH_NOTIF",
+      "repetition": 2,
+      "start": 116,
+      "end": 120
+    },
+    {
+      "task": "PUSH_NOTIF",
+      "repetition": 3,
+      "start": 116,
+      "end": 120
+    },
+    {
+      "task": "HOOK_TRIG",
+      "repetition": 1,
+      "start": 89,
+      "end": 95
+    },
+    {
+      "task": "HOOK_TRIG",
+      "repetition": 2,
+      "start": 89,
+      "end": 95
+    },
+    {
+      "task": "HOOK_TRIG",
+      "repetition": 3,
+      "start": 89,
+      "end": 95
+    },
+    {
+      "task": "HOOK_TRIG",
+      "repetition": 4,
+      "start": 95,
+      "end": 101
+    },
+    {
+      "task": "CONT_MOD",
+      "repetition": 1,
+      "start": 105,
+      "end": 114
+    },
+    {
+      "task": "IMG_PROC",
+      "repetition": 1,
+      "start": 79,
+      "end": 89
+    },
+    {
+      "task": "IMG_PROC",
+      "repetition": 2,
+      "start": 79,
+      "end": 89
+    },
+    {
+      "task": "IMG_PROC",
+      "repetition": 3,
+      "start": 89,
+      "end": 99
+    },
+    {
+      "task": "VID_PROC",
+      "repetition": 1,
+      "start": 121,
+      "end": 124
+    },
+    {
+      "task": "FILE_UPL",
+      "repetition": 1,
+      "start": 113,
+      "end": 123
+    }
+  ],
+  "resource_utilization": [
+    {
+      "time": 0,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 1,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 2,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 3,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 4,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 5,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 6,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 7,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 8,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 9,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 10,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 11,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 12,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 13,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 14,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 15,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 16,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 17,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 18,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 19,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 20,
+      "used": 13,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.54
+    },
+    {
+      "time": 21,
+      "used": 13,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.54
+    },
+    {
+      "time": 22,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 23,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 24,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 25,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 26,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 27,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 28,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 29,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 30,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 31,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 32,
+      "used": 8,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.33
+    },
+    {
+      "time": 33,
+      "used": 8,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.33
+    },
+    {
+      "time": 34,
+      "used": 7,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.29
+    },
+    {
+      "time": 35,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 36,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 37,
+      "used": 8,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.33
+    },
+    {
+      "time": 38,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 39,
+      "used": 14,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.58
+    },
+    {
+      "time": 40,
+      "used": 14,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.58
+    },
+    {
+      "time": 41,
+      "used": 14,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.58
+    },
+    {
+      "time": 42,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 43,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 44,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 45,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 46,
+      "used": 14,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.58
+    },
+    {
+      "time": 47,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 48,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 49,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 50,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 51,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 52,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 53,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 54,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 55,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 56,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 57,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 58,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 59,
+      "used": 7,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.29
+    },
+    {
+      "time": 60,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 61,
+      "used": 7,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.29
+    },
+    {
+      "time": 62,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 63,
+      "used": 30,
+      "available": 238,
+      "utilization_pct": 12,
+      "utilization_fraction": 0.126
+    },
+    {
+      "time": 64,
+      "used": 30,
+      "available": 238,
+      "utilization_pct": 12,
+      "utilization_fraction": 0.126
+    },
+    {
+      "time": 65,
+      "used": 34,
+      "available": 238,
+      "utilization_pct": 14,
+      "utilization_fraction": 0.142
+    },
+    {
+      "time": 66,
+      "used": 35,
+      "available": 238,
+      "utilization_pct": 14,
+      "utilization_fraction": 0.147
+    },
+    {
+      "time": 67,
+      "used": 34,
+      "available": 238,
+      "utilization_pct": 14,
+      "utilization_fraction": 0.142
+    },
+    {
+      "time": 68,
+      "used": 24,
+      "available": 238,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 69,
+      "used": 18,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 70,
+      "used": 14,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.58
+    },
+    {
+      "time": 71,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 72,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 73,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 74,
+      "used": 12,
+      "available": 238,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 75,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 76,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 77,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 78,
+      "used": 23,
+      "available": 238,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.96
+    },
+    {
+      "time": 79,
+      "used": 19,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.79
+    },
+    {
+      "time": 80,
+      "used": 19,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.79
+    },
+    {
+      "time": 81,
+      "used": 25,
+      "available": 238,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.105
+    },
+    {
+      "time": 82,
+      "used": 21,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.88
+    },
+    {
+      "time": 83,
+      "used": 21,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.88
+    },
+    {
+      "time": 84,
+      "used": 21,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.88
+    },
+    {
+      "time": 85,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 86,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 87,
+      "used": 24,
+      "available": 238,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 88,
+      "used": 23,
+      "available": 238,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.96
+    },
+    {
+      "time": 89,
+      "used": 24,
+      "available": 238,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 90,
+      "used": 22,
+      "available": 238,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.92
+    },
+    {
+      "time": 91,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 92,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 93,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 94,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 95,
+      "used": 11,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.46
+    },
+    {
+      "time": 96,
+      "used": 19,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.79
+    },
+    {
+      "time": 97,
+      "used": 19,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.79
+    },
+    {
+      "time": 98,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 99,
+      "used": 11,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.46
+    },
+    {
+      "time": 100,
+      "used": 10,
+      "available": 238,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.42
+    },
+    {
+      "time": 101,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 102,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 103,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 104,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 105,
+      "used": 18,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 106,
+      "used": 15,
+      "available": 238,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.63
+    },
+    {
+      "time": 107,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 108,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 109,
+      "used": 17,
+      "available": 238,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.71
+    },
+    {
+      "time": 110,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 111,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 112,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 113,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 114,
+      "used": 2,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 115,
+      "used": 2,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 116,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 117,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 118,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 119,
+      "used": 9,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.37
+    },
+    {
+      "time": 120,
+      "used": 6,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 121,
+      "used": 8,
+      "available": 238,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.33
+    },
+    {
+      "time": 122,
+      "used": 5,
+      "available": 238,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 123,
+      "used": 3,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.12
+    },
+    {
+      "time": 124,
+      "used": 2,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 125,
+      "used": 2,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 126,
+      "used": 1,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.4
+    },
+    {
+      "time": 127,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 128,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 129,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 130,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 131,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 132,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 133,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 134,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 135,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 136,
+      "used": 20,
+      "available": 238,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.84
+    },
+    {
+      "time": 137,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 138,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 139,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 140,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 141,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 142,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 143,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 144,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 145,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 146,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 147,
+      "used": 4,
+      "available": 238,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.16
+    },
+    {
+      "time": 148,
+      "used": 0,
+      "available": 238,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    }
+  ],
+  "resource_summary": {
+    "total_available": 238,
+    "peak_usage": {
+      "value": 35,
+      "pct": 14
+    },
+    "average_usage": {
+      "value": 11,
+      "pct": 4
+    },
+    "time_window": {
+      "start": 0,
+      "end": 510
+    },
+    "active_time_steps": 149
+  }
+}

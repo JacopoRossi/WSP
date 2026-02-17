@@ -93,7 +93,7 @@ class VectorStore:
         
         # Genera embeddings
         if show_progress:
-            print(f"Generazione embeddings per {len(documents)} documenti...")
+            print(f"Generating embeddings for {len(documents)} documents...")
         
         embedding_results = self.embedding_generator.embed_documents(
             texts, 
@@ -104,17 +104,23 @@ class VectorStore:
         
         # Aggiungi al vector store
         if show_progress:
-            print("Aggiunta documenti al vector store...")
+            print("Adding documents to vector store...")
         
-        self.collection.add(
-            documents=texts,
-            embeddings=embeddings,
-            metadatas=metadatas,
-            ids=ids
-        )
+        import io
+        stderr_backup = sys.stderr
+        try:
+            sys.stderr = io.StringIO()  # Sopprimi stderr per evitare warning telemetria
+            self.collection.add(
+                documents=texts,
+                embeddings=embeddings,
+                metadatas=metadatas,
+                ids=ids
+            )
+        finally:
+            sys.stderr = stderr_backup
         
         if show_progress:
-            print(f"✓ {len(documents)} documenti aggiunti al vector store")
+            print(f"✓ {len(documents)} documents added to vector store")
         
         return len(documents)
     
@@ -205,17 +211,38 @@ class VectorStore:
     
     def delete_collection(self):
         """Elimina la collection corrente"""
-        self.client.delete_collection(name=self.collection_name)
-        print(f"✓ Collection '{self.collection_name}' eliminata")
+        import io
+        stderr_backup = sys.stderr
+        try:
+            sys.stderr = io.StringIO()  # Sopprimi stderr per evitare warning telemetria
+            self.client.delete_collection(name=self.collection_name)
+        finally:
+            sys.stderr = stderr_backup
+        print(f"✓ Collection '{self.collection_name}' deleted")
     
     def reset_collection(self):
         """Resetta la collection (elimina e ricrea)"""
-        self.delete_collection()
-        self.collection = self.client.get_or_create_collection(
-            name=self.collection_name,
-            metadata={"description": "DSL Documentation for RAG"}
-        )
-        print(f"✓ Collection '{self.collection_name}' resettata")
+        import io
+        stderr_backup = sys.stderr
+        try:
+            sys.stderr = io.StringIO()  # Sopprimi stderr per evitare warning telemetria
+            self.delete_collection()
+            self.collection = self.client.get_or_create_collection(
+                name=self.collection_name,
+                metadata={"description": "DSL Documentation for RAG"}
+            )
+        finally:
+            sys.stderr = stderr_backup
+        print(f"✓ Collection '{self.collection_name}' reset")
+    
+    def is_empty(self) -> bool:
+        """
+        Verifica se il vector store è vuoto
+        
+        Returns:
+            True se il vector store è vuoto, False altrimenti
+        """
+        return self.collection.count() == 0
     
     def get_stats(self) -> Dict:
         """
@@ -309,7 +336,7 @@ if __name__ == "__main__":
     from .document_loader import DocumentLoader
     
     # Inizializza componenti
-    print("1. Inizializzazione componenti...")
+    print("1. Initializing components...")
     embedding_gen = EmbeddingGenerator(
         provider="huggingface",
         model="sentence-transformers/all-MiniLM-L6-v2"
@@ -325,7 +352,7 @@ if __name__ == "__main__":
     vector_store.reset_collection()
     
     # Crea documenti di test
-    print("\n2. Creazione documenti di test...")
+    print("\n2. Creating test documents...")
     test_docs = [
         Document(
             content="The SpaceOBC1 system has 8 resources and operates for 33 time units.",
@@ -345,31 +372,31 @@ if __name__ == "__main__":
     ]
     
     # Aggiungi documenti
-    print("\n3. Aggiunta documenti al vector store...")
+    print("\n3. Adding documents to vector store...")
     vector_store.add_documents(test_docs)
     
     # Test ricerca
-    print("\n4. Test ricerca...")
+    print("\n4. Testing search...")
     query = "How many resources does the system have?"
     results = vector_store.search(query, top_k=2)
     
     print(f"\nQuery: '{query}'")
-    print(f"Risultati trovati: {len(results)}\n")
+    print(f"Results found: {len(results)}\n")
     
     for i, result in enumerate(results, 1):
-        print(f"Risultato {i}:")
+        print(f"Result {i}:")
         print(f"  Content: {result['content'][:100]}...")
         print(f"  Distance: {result['distance']:.4f}")
         print()
     
     # Test context retrieval
-    print("5. Test context retrieval...")
+    print("5. Testing context retrieval...")
     context = vector_store.get_relevant_context(query, top_k=2)
     print(f"Context length: {len(context)} chars")
     print(f"Context preview:\n{context[:200]}...\n")
     
     # Statistiche
     stats = vector_store.get_stats()
-    print(f"6. Statistiche: {stats}")
+    print(f"6. Statistics: {stats}")
     
-    print("\n✓ Test completato")
+    print("\n✓ Test completed")

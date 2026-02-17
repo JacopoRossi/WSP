@@ -1,0 +1,6 @@
+# Dipendenze per il generatore di manuali tecnici
+google-genai>=1.0.0
+
+# Dipendenze per la conversione MD to PDF
+markdown>=3.4.0
+weasyprint>=60.0

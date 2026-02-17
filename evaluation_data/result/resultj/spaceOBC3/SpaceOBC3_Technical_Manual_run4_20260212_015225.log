@@ -1,0 +1,362 @@
+UnifyScript run for SpaceOBC3_Technical_Manual_run4.dsl
+Started at: 2026-02-12 01:52:28.504836
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl
+ Output DZN file: dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn
+ Base name: SpaceOBC3_Technical_Manual_run4
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn
+   ==================================================
+Successfully converted DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl to dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc_sched.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn
+   ==================================================
+{
+  "experiment": {
+    "data_file": "dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn",
+    "model_file": "minizinc_model/modelAllOpsParameter.mzn"
+  },
+  "result": {
+    "status": "FEASIBLE",
+    "makespan_end": 26
+  },
+  "schedule": [
+    {
+      "task": "INIT_CORE",
+      "repetition": 1,
+      "start": 0,
+      "end": 14
+    },
+    {
+      "task": "COMM_PROTO",
+      "repetition": 1,
+      "start": 2,
+      "end": 18
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 1,
+      "start": 4,
+      "end": 7
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 2,
+      "start": 9,
+      "end": 12
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 3,
+      "start": 14,
+      "end": 17
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 4,
+      "start": 19,
+      "end": 22
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 1,
+      "start": 6,
+      "end": 8
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 2,
+      "start": 12,
+      "end": 14
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 3,
+      "start": 18,
+      "end": 20
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 4,
+      "start": 24,
+      "end": 26
+    },
+    {
+      "task": "ORBIT_CTRL",
+      "repetition": 1,
+      "start": 5,
+      "end": 13
+    },
+    {
+      "task": "ORBIT_MGMT",
+      "repetition": 1,
+      "start": 10,
+      "end": 20
+    },
+    {
+      "task": "PREPROCESS_SVC",
+      "repetition": 1,
+      "start": 13,
+      "end": 22
+    },
+    {
+      "task": "POSTPROCESS_SVC",
+      "repetition": 1,
+      "start": 14,
+      "end": 25
+    },
+    {
+      "task": "MONITOR_SYS",
+      "repetition": 1,
+      "start": 4,
+      "end": 24
+    },
+    {
+      "task": "DATA_DOWNLINK",
+      "repetition": 1,
+      "start": 16,
+      "end": 21
+    },
+    {
+      "task": "DATA_DOWNLINK",
+      "repetition": 2,
+      "start": 21,
+      "end": 26
+    }
+  ],
+  "resource_utilization": [
+    {
+      "time": 0,
+      "used": 2,
+      "available": 12,
+      "utilization_pct": 16,
+      "utilization_fraction": 0.166
+    },
+    {
+      "time": 1,
+      "used": 2,
+      "available": 12,
+      "utilization_pct": 16,
+      "utilization_fraction": 0.166
+    },
+    {
+      "time": 2,
+      "used": 5,
+      "available": 12,
+      "utilization_pct": 41,
+      "utilization_fraction": 0.416
+    },
+    {
+      "time": 3,
+      "used": 5,
+      "available": 12,
+      "utilization_pct": 41,
+      "utilization_fraction": 0.416
+    },
+    {
+      "time": 4,
+      "used": 7,
+      "available": 12,
+      "utilization_pct": 58,
+      "utilization_fraction": 0.583
+    },
+    {
+      "time": 5,
+      "used": 9,
+      "available": 12,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 6,
+      "used": 10,
+      "available": 12,
+      "utilization_pct": 83,
+      "utilization_fraction": 0.833
+    },
+    {
+      "time": 7,
+      "used": 9,
+      "available": 12,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 8,
+      "used": 8,
+      "available": 12,
+      "utilization_pct": 66,
+      "utilization_fraction": 0.666
+    },
+    {
+      "time": 9,
+      "used": 9,
+      "available": 12,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 10,
+      "used": 11,
+      "available": 12,
+      "utilization_pct": 91,
+      "utilization_fraction": 0.916
+    },
+    {
+      "time": 11,
+      "used": 11,
+      "available": 12,
+      "utilization_pct": 91,
+      "utilization_fraction": 0.916
+    },
+    {
+      "time": 12,
+      "used": 11,
+      "available": 12,
+      "utilization_pct": 91,
+      "utilization_fraction": 0.916
+    },
+    {
+      "time": 13,
+      "used": 10,
+      "available": 12,
+      "utilization_pct": 83,
+      "utilization_fraction": 0.833
+    },
+    {
+      "time": 14,
+      "used": 10,
+      "available": 12,
+      "utilization_pct": 83,
+      "utilization_fraction": 0.833
+    },
+    {
+      "time": 15,
+      "used": 10,
+      "available": 12,
+      "utilization_pct": 83,
+      "utilization_fraction": 0.833
+    },
+    {
+      "time": 16,
+      "used": 12,
+      "available": 12,
+      "utilization_pct": 100,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 17,
+      "used": 11,
+      "available": 12,
+      "utilization_pct": 91,
+      "utilization_fraction": 0.916
+    },
+    {
+      "time": 18,
+      "used": 9,
+      "available": 12,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 19,
+      "used": 10,
+      "available": 12,
+      "utilization_pct": 83,
+      "utilization_fraction": 0.833
+    },
+    {
+      "time": 20,
+      "used": 7,
+      "available": 12,
+      "utilization_pct": 58,
+      "utilization_fraction": 0.583
+    },
+    {
+      "time": 21,
+      "used": 7,
+      "available": 12,
+      "utilization_pct": 58,
+      "utilization_fraction": 0.583
+    },
+    {
+      "time": 22,
+      "used": 5,
+      "available": 12,
+      "utilization_pct": 41,
+      "utilization_fraction": 0.416
+    },
+    {
+      "time": 23,
+      "used": 5,
+      "available": 12,
+      "utilization_pct": 41,
+      "utilization_fraction": 0.416
+    },
+    {
+      "time": 24,
+      "used": 5,
+      "available": 12,
+      "utilization_pct": 41,
+      "utilization_fraction": 0.416
+    },
+    {
+      "time": 25,
+      "used": 3,
+      "available": 12,
+      "utilization_pct": 25,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 26,
+      "used": 0,
+      "available": 12,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    }
+  ],
+  "resource_summary": {
+    "total_available": 12,
+    "peak_usage": {
+      "value": 12,
+      "pct": 100
+    },
+    "average_usage": {
+      "value": 7,
+      "pct": 58
+    },
+    "time_window": {
+      "start": 0,
+      "end": 33
+    },
+    "active_time_steps": 27
+  }
+}
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run4.dsl
+ DZN file generated: dzn_experiments/SpaceOBC3_Technical_Manual_run4.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 01:52:29.298780

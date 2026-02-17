@@ -74,7 +74,7 @@ Examples:
     file_stem = dsl_path.stem  # e.g., "22_space" from "22_space.dsl"
     
     # Build paths
-    dzn_output = Path("dzn_experiments") / f"{file_stem}.dzn"
+    dzn_output = Path("temp_dzn_data") / f"{file_stem}.dzn"
     
     print(" TASK SCHEDULING PIPELINE AUTOMATION")
     print("="*60)
@@ -83,8 +83,8 @@ Examples:
     print(f" Output DZN file: {dzn_output}")
     print(f" Base name: {file_stem}")
     
-    # Create dzn_experiments directory if it doesn't exist
-    dzn_dir = Path("dzn_experiments")
+    # Create temp_dzn_data directory if it doesn't exist
+    dzn_dir = Path("temp_dzn_data")
     dzn_dir.mkdir(exist_ok=True)
     
     # Step 1: Convert DSL to DZN
@@ -101,7 +101,7 @@ Examples:
         sys.exit(1)
     
     # Step 2: Run MiniZinc and generate Gantt chart
-    cmd2 = f'python 0_2_minizinc.py {model_path} {dzn_output}'
+    cmd2 = f'python 0_2_minizinc_sched.py {model_path} {dzn_output}'
     success2 = run_command(cmd2, "MiniZinc Execution & Gantt Chart Generation")
     
     # If it fails, try alternative approach
@@ -109,14 +109,14 @@ Examples:
         print("\n Trying alternative approach...")
         
         # Run MiniZinc directly
-        minizinc_cmd = f"python 0_2_minizinc.py {model_path} {dzn_output}"
+        minizinc_cmd = f"python 0_2_minizinc_sched.py {model_path} {dzn_output}"
         success2 = run_command(minizinc_cmd, "MiniZinc Execution (Direct)")
         
         if success2:
             print("\n MiniZinc completed successfully!")
             print("   Note: Gantt chart generation might have encoding issues on Windows")
             print("   You can run the Gantt generation manually if needed:")
-            print(f"   python 0_2_minizinc.py {model_path} {dzn_output}")
+            print(f"   python 0_2_minizinc_sched.py {model_path} {dzn_output}")
     
     if not success2:
         print("\n Pipeline failed at step 2!")

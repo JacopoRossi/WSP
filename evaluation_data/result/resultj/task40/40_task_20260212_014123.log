@@ -1,0 +1,1562 @@
+UnifyScript run for 40_task.dsl
+Started at: 2026-02-12 01:41:23.804879
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/task40/40_task.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/task40/40_task.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/task40/40_task.dsl
+ Output DZN file: dzn_experiments/40_task.dzn
+ Base name: 40_task
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/task40/40_task.dsl dzn_experiments/40_task.dzn
+   ==================================================
+Successfully converted DSL/task40/40_task.dsl to dzn_experiments/40_task.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc_sched.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/40_task.dzn
+   ==================================================
+{
+  "experiment": {
+    "data_file": "dzn_experiments/40_task.dzn",
+    "model_file": "minizinc_model/modelAllOpsParameter.mzn"
+  },
+  "result": {
+    "status": "FEASIBLE",
+    "makespan_end": 140
+  },
+  "schedule": [
+    {
+      "task": "Payment_Validation",
+      "repetition": 1,
+      "start": 0,
+      "end": 5
+    },
+    {
+      "task": "Inventory_Check",
+      "repetition": 1,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "Inventory_Check",
+      "repetition": 2,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "Inventory_Check",
+      "repetition": 3,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "Inventory_Check",
+      "repetition": 4,
+      "start": 5,
+      "end": 9
+    },
+    {
+      "task": "Shipping_Calculation",
+      "repetition": 1,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "Shipping_Calculation",
+      "repetition": 2,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "Shipping_Calculation",
+      "repetition": 3,
+      "start": 14,
+      "end": 24
+    },
+    {
+      "task": "Shipping_Calculation",
+      "repetition": 4,
+      "start": 24,
+      "end": 34
+    },
+    {
+      "task": "Order_Confirmation",
+      "repetition": 1,
+      "start": 34,
+      "end": 42
+    },
+    {
+      "task": "Customer_Notification",
+      "repetition": 1,
+      "start": 46,
+      "end": 51
+    },
+    {
+      "task": "Warehouse_Allocation",
+      "repetition": 1,
+      "start": 23,
+      "end": 27
+    },
+    {
+      "task": "Warehouse_Allocation",
+      "repetition": 2,
+      "start": 27,
+      "end": 31
+    },
+    {
+      "task": "Quality_Check",
+      "repetition": 1,
+      "start": 43,
+      "end": 46
+    },
+    {
+      "task": "Quality_Check",
+      "repetition": 2,
+      "start": 43,
+      "end": 46
+    },
+    {
+      "task": "Quality_Check",
+      "repetition": 3,
+      "start": 43,
+      "end": 46
+    },
+    {
+      "task": "Quality_Check",
+      "repetition": 4,
+      "start": 43,
+      "end": 46
+    },
+    {
+      "task": "Final_Processing",
+      "repetition": 1,
+      "start": 53,
+      "end": 62
+    },
+    {
+      "task": "Final_Processing",
+      "repetition": 2,
+      "start": 53,
+      "end": 62
+    },
+    {
+      "task": "Final_Processing",
+      "repetition": 3,
+      "start": 53,
+      "end": 62
+    },
+    {
+      "task": "Tax_Calculation",
+      "repetition": 1,
+      "start": 44,
+      "end": 49
+    },
+    {
+      "task": "Document_Generation",
+      "repetition": 1,
+      "start": 46,
+      "end": 52
+    },
+    {
+      "task": "Document_Generation",
+      "repetition": 2,
+      "start": 46,
+      "end": 52
+    },
+    {
+      "task": "Document_Generation",
+      "repetition": 3,
+      "start": 46,
+      "end": 52
+    },
+    {
+      "task": "Document_Generation",
+      "repetition": 4,
+      "start": 46,
+      "end": 52
+    },
+    {
+      "task": "Compliance_Check",
+      "repetition": 1,
+      "start": 30,
+      "end": 34
+    },
+    {
+      "task": "Compliance_Check",
+      "repetition": 2,
+      "start": 37,
+      "end": 41
+    },
+    {
+      "task": "Compliance_Check",
+      "repetition": 3,
+      "start": 44,
+      "end": 48
+    },
+    {
+      "task": "Archive_Processing",
+      "repetition": 1,
+      "start": 41,
+      "end": 47
+    },
+    {
+      "task": "Archive_Processing",
+      "repetition": 2,
+      "start": 41,
+      "end": 47
+    },
+    {
+      "task": "Archive_Processing",
+      "repetition": 3,
+      "start": 41,
+      "end": 47
+    },
+    {
+      "task": "Security_Validation",
+      "repetition": 1,
+      "start": 49,
+      "end": 52
+    },
+    {
+      "task": "Performance_Monitor",
+      "repetition": 1,
+      "start": 58,
+      "end": 63
+    },
+    {
+      "task": "Backup_Creation",
+      "repetition": 1,
+      "start": 58,
+      "end": 65
+    },
+    {
+      "task": "Backup_Creation",
+      "repetition": 2,
+      "start": 58,
+      "end": 65
+    },
+    {
+      "task": "Report_Generation",
+      "repetition": 1,
+      "start": 61,
+      "end": 65
+    },
+    {
+      "task": "Report_Generation",
+      "repetition": 2,
+      "start": 61,
+      "end": 65
+    },
+    {
+      "task": "Data_Encryption",
+      "repetition": 1,
+      "start": 67,
+      "end": 71
+    },
+    {
+      "task": "Data_Encryption",
+      "repetition": 2,
+      "start": 69,
+      "end": 73
+    },
+    {
+      "task": "Data_Encryption",
+      "repetition": 3,
+      "start": 71,
+      "end": 75
+    },
+    {
+      "task": "Data_Encryption",
+      "repetition": 4,
+      "start": 73,
+      "end": 77
+    },
+    {
+      "task": "Audit_Trail",
+      "repetition": 1,
+      "start": 69,
+      "end": 79
+    },
+    {
+      "task": "Audit_Trail",
+      "repetition": 2,
+      "start": 69,
+      "end": 79
+    },
+    {
+      "task": "System_Cleanup",
+      "repetition": 1,
+      "start": 71,
+      "end": 76
+    },
+    {
+      "task": "Final_Validation",
+      "repetition": 1,
+      "start": 63,
+      "end": 67
+    },
+    {
+      "task": "Final_Validation",
+      "repetition": 2,
+      "start": 67,
+      "end": 71
+    },
+    {
+      "task": "Final_Validation",
+      "repetition": 3,
+      "start": 71,
+      "end": 75
+    },
+    {
+      "task": "Final_Validation",
+      "repetition": 4,
+      "start": 75,
+      "end": 79
+    },
+    {
+      "task": "Risk_Assessment",
+      "repetition": 1,
+      "start": 74,
+      "end": 77
+    },
+    {
+      "task": "Fraud_Detection",
+      "repetition": 1,
+      "start": 61,
+      "end": 70
+    },
+    {
+      "task": "Currency_Conversion",
+      "repetition": 1,
+      "start": 69,
+      "end": 78
+    },
+    {
+      "task": "Currency_Conversion",
+      "repetition": 2,
+      "start": 69,
+      "end": 78
+    },
+    {
+      "task": "Price_Optimization",
+      "repetition": 1,
+      "start": 83,
+      "end": 91
+    },
+    {
+      "task": "Loyalty_Processing",
+      "repetition": 1,
+      "start": 74,
+      "end": 77
+    },
+    {
+      "task": "Return_Handling",
+      "repetition": 1,
+      "start": 82,
+      "end": 86
+    },
+    {
+      "task": "Return_Handling",
+      "repetition": 2,
+      "start": 82,
+      "end": 86
+    },
+    {
+      "task": "Refund_Processing",
+      "repetition": 1,
+      "start": 87,
+      "end": 91
+    },
+    {
+      "task": "Refund_Processing",
+      "repetition": 2,
+      "start": 87,
+      "end": 91
+    },
+    {
+      "task": "Refund_Processing",
+      "repetition": 3,
+      "start": 87,
+      "end": 91
+    },
+    {
+      "task": "Product_Recommendation",
+      "repetition": 1,
+      "start": 47,
+      "end": 53
+    },
+    {
+      "task": "Product_Recommendation",
+      "repetition": 2,
+      "start": 47,
+      "end": 53
+    },
+    {
+      "task": "Product_Recommendation",
+      "repetition": 3,
+      "start": 47,
+      "end": 53
+    },
+    {
+      "task": "Product_Recommendation",
+      "repetition": 4,
+      "start": 47,
+      "end": 53
+    },
+    {
+      "task": "Analytics_Update",
+      "repetition": 1,
+      "start": 81,
+      "end": 87
+    },
+    {
+      "task": "Analytics_Update",
+      "repetition": 2,
+      "start": 96,
+      "end": 102
+    },
+    {
+      "task": "Cache_Refresh",
+      "repetition": 1,
+      "start": 90,
+      "end": 96
+    },
+    {
+      "task": "Log_Processing",
+      "repetition": 1,
+      "start": 104,
+      "end": 110
+    },
+    {
+      "task": "Log_Processing",
+      "repetition": 2,
+      "start": 104,
+      "end": 110
+    },
+    {
+      "task": "Error_Handling",
+      "repetition": 1,
+      "start": 111,
+      "end": 114
+    },
+    {
+      "task": "Error_Handling",
+      "repetition": 2,
+      "start": 111,
+      "end": 114
+    },
+    {
+      "task": "Load_Balancing",
+      "repetition": 1,
+      "start": 95,
+      "end": 101
+    },
+    {
+      "task": "Load_Balancing",
+      "repetition": 2,
+      "start": 95,
+      "end": 101
+    },
+    {
+      "task": "Load_Balancing",
+      "repetition": 3,
+      "start": 101,
+      "end": 107
+    },
+    {
+      "task": "Database_Sync",
+      "repetition": 1,
+      "start": 105,
+      "end": 112
+    },
+    {
+      "task": "API_Validation",
+      "repetition": 1,
+      "start": 123,
+      "end": 132
+    },
+    {
+      "task": "API_Validation",
+      "repetition": 2,
+      "start": 125,
+      "end": 134
+    },
+    {
+      "task": "API_Validation",
+      "repetition": 3,
+      "start": 127,
+      "end": 136
+    },
+    {
+      "task": "Session_Management",
+      "repetition": 1,
+      "start": 65,
+      "end": 69
+    },
+    {
+      "task": "Email_Dispatch",
+      "repetition": 1,
+      "start": 96,
+      "end": 99
+    },
+    {
+      "task": "SMS_Notification",
+      "repetition": 1,
+      "start": 107,
+      "end": 114
+    },
+    {
+      "task": "SMS_Notification",
+      "repetition": 2,
+      "start": 117,
+      "end": 124
+    },
+    {
+      "task": "SMS_Notification",
+      "repetition": 3,
+      "start": 127,
+      "end": 134
+    },
+    {
+      "task": "Push_Notification",
+      "repetition": 1,
+      "start": 116,
+      "end": 126
+    },
+    {
+      "task": "Webhook_Trigger",
+      "repetition": 1,
+      "start": 135,
+      "end": 140
+    }
+  ],
+  "resource_utilization": [
+    {
+      "time": 0,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 1,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 2,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 3,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 4,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 5,
+      "used": 20,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.86
+    },
+    {
+      "time": 6,
+      "used": 20,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.86
+    },
+    {
+      "time": 7,
+      "used": 20,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.86
+    },
+    {
+      "time": 8,
+      "used": 20,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.86
+    },
+    {
+      "time": 9,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 10,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 11,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 12,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 13,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 14,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 15,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 16,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 17,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 18,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 19,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 20,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 21,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 22,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 23,
+      "used": 10,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.43
+    },
+    {
+      "time": 24,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 25,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 26,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 27,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 28,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 29,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 30,
+      "used": 7,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.3
+    },
+    {
+      "time": 31,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 32,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 33,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 34,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 35,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 36,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 37,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 38,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 39,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 40,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 41,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 42,
+      "used": 3,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.13
+    },
+    {
+      "time": 43,
+      "used": 19,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.82
+    },
+    {
+      "time": 44,
+      "used": 25,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.108
+    },
+    {
+      "time": 45,
+      "used": 25,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.108
+    },
+    {
+      "time": 46,
+      "used": 21,
+      "available": 230,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.91
+    },
+    {
+      "time": 47,
+      "used": 30,
+      "available": 230,
+      "utilization_pct": 13,
+      "utilization_fraction": 0.13
+    },
+    {
+      "time": 48,
+      "used": 27,
+      "available": 230,
+      "utilization_pct": 11,
+      "utilization_fraction": 0.117
+    },
+    {
+      "time": 49,
+      "used": 27,
+      "available": 230,
+      "utilization_pct": 11,
+      "utilization_fraction": 0.117
+    },
+    {
+      "time": 50,
+      "used": 27,
+      "available": 230,
+      "utilization_pct": 11,
+      "utilization_fraction": 0.117
+    },
+    {
+      "time": 51,
+      "used": 23,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 52,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 53,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 54,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 55,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 56,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 57,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 58,
+      "used": 17,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.73
+    },
+    {
+      "time": 59,
+      "used": 17,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.73
+    },
+    {
+      "time": 60,
+      "used": 17,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.73
+    },
+    {
+      "time": 61,
+      "used": 21,
+      "available": 230,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.91
+    },
+    {
+      "time": 62,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 63,
+      "used": 10,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.43
+    },
+    {
+      "time": 64,
+      "used": 10,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.43
+    },
+    {
+      "time": 65,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 66,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 67,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 68,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 69,
+      "used": 24,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.104
+    },
+    {
+      "time": 70,
+      "used": 22,
+      "available": 230,
+      "utilization_pct": 9,
+      "utilization_fraction": 0.95
+    },
+    {
+      "time": 71,
+      "used": 25,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.108
+    },
+    {
+      "time": 72,
+      "used": 25,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.108
+    },
+    {
+      "time": 73,
+      "used": 25,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.108
+    },
+    {
+      "time": 74,
+      "used": 29,
+      "available": 230,
+      "utilization_pct": 12,
+      "utilization_fraction": 0.126
+    },
+    {
+      "time": 75,
+      "used": 26,
+      "available": 230,
+      "utilization_pct": 11,
+      "utilization_fraction": 0.113
+    },
+    {
+      "time": 76,
+      "used": 23,
+      "available": 230,
+      "utilization_pct": 10,
+      "utilization_fraction": 0.1
+    },
+    {
+      "time": 77,
+      "used": 16,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.69
+    },
+    {
+      "time": 78,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 79,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 80,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 81,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 82,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 83,
+      "used": 15,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.65
+    },
+    {
+      "time": 84,
+      "used": 15,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.65
+    },
+    {
+      "time": 85,
+      "used": 15,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.65
+    },
+    {
+      "time": 86,
+      "used": 7,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.3
+    },
+    {
+      "time": 87,
+      "used": 18,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.78
+    },
+    {
+      "time": 88,
+      "used": 18,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.78
+    },
+    {
+      "time": 89,
+      "used": 18,
+      "available": 230,
+      "utilization_pct": 7,
+      "utilization_fraction": 0.78
+    },
+    {
+      "time": 90,
+      "used": 20,
+      "available": 230,
+      "utilization_pct": 8,
+      "utilization_fraction": 0.86
+    },
+    {
+      "time": 91,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 92,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 93,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 94,
+      "used": 2,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.8
+    },
+    {
+      "time": 95,
+      "used": 10,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.43
+    },
+    {
+      "time": 96,
+      "used": 16,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.69
+    },
+    {
+      "time": 97,
+      "used": 16,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.69
+    },
+    {
+      "time": 98,
+      "used": 16,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.69
+    },
+    {
+      "time": 99,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 100,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 101,
+      "used": 8,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.34
+    },
+    {
+      "time": 102,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 103,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 104,
+      "used": 14,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.6
+    },
+    {
+      "time": 105,
+      "used": 15,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.65
+    },
+    {
+      "time": 106,
+      "used": 15,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.65
+    },
+    {
+      "time": 107,
+      "used": 14,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.6
+    },
+    {
+      "time": 108,
+      "used": 14,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.6
+    },
+    {
+      "time": 109,
+      "used": 14,
+      "available": 230,
+      "utilization_pct": 6,
+      "utilization_fraction": 0.6
+    },
+    {
+      "time": 110,
+      "used": 4,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.17
+    },
+    {
+      "time": 111,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 112,
+      "used": 11,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.47
+    },
+    {
+      "time": 113,
+      "used": 11,
+      "available": 230,
+      "utilization_pct": 4,
+      "utilization_fraction": 0.47
+    },
+    {
+      "time": 114,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 115,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    },
+    {
+      "time": 116,
+      "used": 3,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.13
+    },
+    {
+      "time": 117,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 118,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 119,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 120,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 121,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 122,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 123,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 124,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 125,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 126,
+      "used": 6,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.26
+    },
+    {
+      "time": 127,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 128,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 129,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 130,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 131,
+      "used": 12,
+      "available": 230,
+      "utilization_pct": 5,
+      "utilization_fraction": 0.52
+    },
+    {
+      "time": 132,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 133,
+      "used": 9,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.39
+    },
+    {
+      "time": 134,
+      "used": 3,
+      "available": 230,
+      "utilization_pct": 1,
+      "utilization_fraction": 0.13
+    },
+    {
+      "time": 135,
+      "used": 8,
+      "available": 230,
+      "utilization_pct": 3,
+      "utilization_fraction": 0.34
+    },
+    {
+      "time": 136,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 137,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 138,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 139,
+      "used": 5,
+      "available": 230,
+      "utilization_pct": 2,
+      "utilization_fraction": 0.21
+    },
+    {
+      "time": 140,
+      "used": 0,
+      "available": 230,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    }
+  ],
+  "resource_summary": {
+    "total_available": 230,
+    "peak_usage": {
+      "value": 30,
+      "pct": 13
+    },
+    "average_usage": {
+      "value": 10,
+      "pct": 4
+    },
+    "time_window": {
+      "start": 0,
+      "end": 490
+    },
+    "active_time_steps": 141
+  }
+}
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/task40/40_task.dsl
+ DZN file generated: dzn_experiments/40_task.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 01:41:33.753730
