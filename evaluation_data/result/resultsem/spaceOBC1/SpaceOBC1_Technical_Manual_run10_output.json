@@ -1,0 +1,369 @@
+{
+  "experiment": {
+    "data_file": "dzn_experiments/SpaceOBC1_Technical_Manual_run10.dzn",
+    "model_file": "minizinc_model/modelAllOpsParameter.mzn"
+  },
+  "result": {
+    "status": "FEASIBLE",
+    "makespan_end": 32
+  },
+  "schedule": [
+    {
+      "task": "INIT_CORE",
+      "repetition": 1,
+      "start": 0,
+      "end": 14
+    },
+    {
+      "task": "COMM_PROTO",
+      "repetition": 1,
+      "start": 0,
+      "end": 16
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 1,
+      "start": 2,
+      "end": 5
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 2,
+      "start": 10,
+      "end": 13
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 3,
+      "start": 18,
+      "end": 21
+    },
+    {
+      "task": "CTRL_EXEC",
+      "repetition": 4,
+      "start": 26,
+      "end": 29
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 1,
+      "start": 4,
+      "end": 6
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 2,
+      "start": 12,
+      "end": 14
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 3,
+      "start": 20,
+      "end": 22
+    },
+    {
+      "task": "SYNC_PROC",
+      "repetition": 4,
+      "start": 28,
+      "end": 30
+    },
+    {
+      "task": "ANALYSIS_FULL",
+      "repetition": 1,
+      "start": 4,
+      "end": 18
+    },
+    {
+      "task": "VERIFY_QUICK",
+      "repetition": 1,
+      "start": 12,
+      "end": 19
+    },
+    {
+      "task": "PREPROCESS_SVC",
+      "repetition": 1,
+      "start": 18,
+      "end": 31
+    },
+    {
+      "task": "POSTPROCESS_SVC",
+      "repetition": 1,
+      "start": 20,
+      "end": 32
+    },
+    {
+      "task": "ORBIT_CTRL",
+      "repetition": 1,
+      "start": 18,
+      "end": 31
+    },
+    {
+      "task": "ORBIT_MGMT",
+      "repetition": 1,
+      "start": 18,
+      "end": 32
+    },
+    {
+      "task": "MONITOR_SYS",
+      "repetition": 1,
+      "start": 10,
+      "end": 22
+    },
+    {
+      "task": "SAFE_DIR",
+      "repetition": 1,
+      "start": 0,
+      "end": 12
+    }
+  ],
+  "resource_utilization": [
+    {
+      "time": 0,
+      "used": 3,
+      "available": 8,
+      "utilization_pct": 37,
+      "utilization_fraction": 0.375
+    },
+    {
+      "time": 1,
+      "used": 3,
+      "available": 8,
+      "utilization_pct": 37,
+      "utilization_fraction": 0.375
+    },
+    {
+      "time": 2,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 3,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 4,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 5,
+      "used": 5,
+      "available": 8,
+      "utilization_pct": 62,
+      "utilization_fraction": 0.625
+    },
+    {
+      "time": 6,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 7,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 8,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 9,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 10,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 11,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 12,
+      "used": 7,
+      "available": 8,
+      "utilization_pct": 87,
+      "utilization_fraction": 0.875
+    },
+    {
+      "time": 13,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 14,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 15,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 16,
+      "used": 3,
+      "available": 8,
+      "utilization_pct": 37,
+      "utilization_fraction": 0.375
+    },
+    {
+      "time": 17,
+      "used": 3,
+      "available": 8,
+      "utilization_pct": 37,
+      "utilization_fraction": 0.375
+    },
+    {
+      "time": 18,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 19,
+      "used": 5,
+      "available": 8,
+      "utilization_pct": 62,
+      "utilization_fraction": 0.625
+    },
+    {
+      "time": 20,
+      "used": 7,
+      "available": 8,
+      "utilization_pct": 87,
+      "utilization_fraction": 0.875
+    },
+    {
+      "time": 21,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 22,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 23,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 24,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 25,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 26,
+      "used": 5,
+      "available": 8,
+      "utilization_pct": 62,
+      "utilization_fraction": 0.625
+    },
+    {
+      "time": 27,
+      "used": 5,
+      "available": 8,
+      "utilization_pct": 62,
+      "utilization_fraction": 0.625
+    },
+    {
+      "time": 28,
+      "used": 6,
+      "available": 8,
+      "utilization_pct": 75,
+      "utilization_fraction": 0.75
+    },
+    {
+      "time": 29,
+      "used": 5,
+      "available": 8,
+      "utilization_pct": 62,
+      "utilization_fraction": 0.625
+    },
+    {
+      "time": 30,
+      "used": 4,
+      "available": 8,
+      "utilization_pct": 50,
+      "utilization_fraction": 0.5
+    },
+    {
+      "time": 31,
+      "used": 2,
+      "available": 8,
+      "utilization_pct": 25,
+      "utilization_fraction": 0.25
+    },
+    {
+      "time": 32,
+      "used": 0,
+      "available": 8,
+      "utilization_pct": 0,
+      "utilization_fraction": 0.0
+    }
+  ],
+  "resource_summary": {
+    "total_available": 8,
+    "peak_usage": {
+      "value": 7,
+      "pct": 87
+    },
+    "average_usage": {
+      "value": 4,
+      "pct": 50
+    },
+    "time_window": {
+      "start": 0,
+      "end": 33
+    },
+    "active_time_steps": 33
+  }
+}

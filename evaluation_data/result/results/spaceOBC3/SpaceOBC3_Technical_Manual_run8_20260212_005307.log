@@ -1,0 +1,110 @@
+UnifyScript run for SpaceOBC3_Technical_Manual_run8.dsl
+Started at: 2026-02-12 00:53:14.013065
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl
+ Output DZN file: dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+ Base name: SpaceOBC3_Technical_Manual_run8
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+   ==================================================
+Successfully converted DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl to dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+   ==================================================
+Loading model: minizinc_model/modelAllOpsParameter.mzn
+Loading data: dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+Solving...
+
+Result:
+FEASIBLE
+Makespan end: 26
+
+Schedule:
+Task "INIT_CORE": start=0, end=14
+Task "COMM_PROTO": start=2, end=18
+Task "CTRL_EXEC": start=4, end=7
+Task "CTRL_EXEC" (Rep2): start=9, end=12
+Task "CTRL_EXEC" (Rep3): start=14, end=17
+Task "CTRL_EXEC" (Rep4): start=19, end=22
+Task "SYNC_PROC": start=6, end=8
+Task "SYNC_PROC" (Rep2): start=12, end=14
+Task "SYNC_PROC" (Rep3): start=18, end=20
+Task "SYNC_PROC" (Rep4): start=24, end=26
+Task "ORBIT_CTRL": start=5, end=13
+Task "ORBIT_MGMT": start=10, end=20
+Task "PREPROCESS_SVC": start=13, end=22
+Task "POSTPROCESS_SVC": start=14, end=25
+Task "MONITOR_SYS": start=4, end=24
+Task "DATA_DOWNLINK": start=16, end=21
+Task "DATA_DOWNLINK" (Rep2): start=21, end=26
+
+
+Resource: 2;2;5;5;7;9;10;9;8;9;11;11;11;10;10;10;12;11;9;10;7;7;5;5;5;3;0;0;0;0;0;0;0;0
+
+
+=== RESOURCE UTILIZATION ===
+Time	resource Used	resource Available	Utilization (%)	Utilization (fraction)
+0	2	12	16%	0.166
+1	2	12	16%	0.166
+2	5	12	41%	0.416
+3	5	12	41%	0.416
+4	7	12	58%	0.583
+5	9	12	75%	0.750
+6	10	12	83%	0.833
+7	9	12	75%	0.750
+8	8	12	66%	0.666
+9	9	12	75%	0.750
+10	11	12	91%	0.916
+11	11	12	91%	0.916
+12	11	12	91%	0.916
+13	10	12	83%	0.833
+14	10	12	83%	0.833
+15	10	12	83%	0.833
+16	12	12	100%	0.1000
+17	11	12	91%	0.916
+18	9	12	75%	0.750
+19	10	12	83%	0.833
+20	7	12	58%	0.583
+21	7	12	58%	0.583
+22	5	12	41%	0.416
+23	5	12	41%	0.416
+24	5	12	41%	0.416
+25	3	12	25%	0.250
+26	0	12	0%	0.0
+
+=== OVERALL RESOURCE STATISTICS ===
+resource Resource Summary:
+  Total Available: 12
+  Peak Usage: 12 (100%)
+  Average Usage: 7 (58%)
+  Time Window: [0..33]
+  Active Time Steps: 27
+
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/spaceOBC3/SpaceOBC3_Technical_Manual_run8.dsl
+ DZN file generated: dzn_experiments/SpaceOBC3_Technical_Manual_run8.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 00:53:14.797752

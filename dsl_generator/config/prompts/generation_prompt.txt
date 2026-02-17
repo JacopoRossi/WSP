@@ -1,0 +1,53 @@
+Generate a complete DSL specification in YAML format based on the extracted information.
+
+EXTRACTED INFORMATION:
+{extracted_info}
+
+EXAMPLE DSL FORMAT:
+```yaml
+# Global parameters
+wsp:
+  name: "SystemName"
+  h_start: 0
+  h_end: 33
+  r_max: 8
+
+# Service definitions
+services:
+  - id: 1
+    name: "ServiceName"
+    tasks_set: [1, 2]
+
+# Task definitions
+tasks:
+  - id: 1
+    name: "TASK_NAME"
+    sig: "tasksig"
+    dur: 10
+    res_q: 1
+    rc: 0
+    rd: 0
+    max_c: 1
+
+# Start-to-start precedence constraints
+start_constraints:
+  - from: 1
+    to: 2
+    delay: 5
+    wait_all: false
+```
+
+REQUIREMENTS:
+1. Generate valid YAML syntax with proper indentation (2 spaces)
+2. Include comments for each major section
+3. Ensure all task IDs referenced in services and constraints exist in the tasks section
+4. Use proper data types (integers for numbers, strings in quotes, booleans without quotes)
+5. Maintain the exact order: wsp, services, tasks, start_constraints
+6. Add inline comments for task names in constraints (e.g., "# TASK_NAME")
+
+IMPORTANT NOTES:
+- Generate all start_constraints from the extracted information
+- Ensure all task IDs referenced in services and constraints exist in the tasks section
+- Use valid YAML syntax with proper indentation
+
+Generate the complete DSL now. Output ONLY the YAML content, no additional explanation.

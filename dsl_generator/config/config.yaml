@@ -1,0 +1,132 @@
+# DSL Generator Configuration
+
+# LLM Configuration
+llm:
+  provider: "openai"  # Options: openai, anthropic, ollama
+  model: "gpt-5.1"  # Modello efficiente e veloce (gpt-4o-mini, gpt-4o, gpt-3.5-turbo)
+  api_key: "${OPENAI_API_KEY}"  # Set via environment variable
+  temperature: 0.0
+  # max_tokens: 20000  # Commentato: usa il massimo disponibile del modello senza limiti artificiali
+  encoding: "cl100k_base"  # Encoding per il tokenizer
+  seed: 42  # 
+  
+  # Alternative configurations
+  # For Anthropic:
+  # provider: "anthropic"
+  # model: "claude-3-opus-20240229"
+  # api_key: "${ANTHROPIC_API_KEY}"
+  
+  # For local Ollama:
+  # provider: "ollama"
+  # model: "llama2"
+  # base_url: "http://localhost:11434"
+
+# RAG Configuration
+rag:
+  # Embedding model
+  embedding_provider: "openai"  # Options: openai, huggingface, sentence-transformers
+  embedding_model: "text-embedding-3-large"
+  embedding_dimension: 3072
+  
+  # For HuggingFace embeddings:
+  # embedding_provider: "huggingface"
+  # embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  
+  # Chunking strategy
+  chunk_size: 1000  # AUMENTATO: 1500 → 2500 per evitare di spezzare tabelle di constraint
+  chunk_overlap: 350  # AUMENTATO: 300 → 600 (24% overlap) per catturare constraint ai bordi
+  
+  # Vector store
+  vector_store: "chromadb"  # Options: chromadb, faiss
+  vector_store_path: "data/vector_db"
+  collection_name: "dsl_documentation"
+  
+  # Retrieval
+  top_k: 60  # AUMENTATO: 40 → 60 per recuperare più contesto e tutti i constraint
+  similarity_threshold: 0.15  # Ulteriormente ridotto per massima copertura di constraint
+  
+  # Document processing
+  supported_formats:
+    - "md"
+    - "txt"
+    - "pdf"
+    - "docx"
+
+# DSL Configuration
+dsl:
+  # Output format
+  output_format: "yaml"
+  indent: 2
+  
+  # Validation
+  validate: true
+  strict_mode: false
+  
+  # Schema definition
+  schema:
+    wsp:
+      required: ["name", "h_start", "h_end", "r_max"]
+      types:
+        name: "string"
+        h_start: "integer"
+        h_end: "integer"
+        r_max: "integer"
+    
+    services:
+      required: ["id", "name", "tasks_set"]
+      types:
+        id: "integer"
+        name: "string"
+        tasks_set: "list[integer]"
+    
+    tasks:
+      required: ["id", "name", "sig", "dur", "res_q", "rc", "rd", "max_c"]
+      types:
+        id: "integer"
+        name: "string"
+        sig: "string"
+        dur: "integer"
+        res_q: "integer"
+        rc: "integer"
+        rd: "integer"
+        max_c: "integer"
+    
+    start_constraints:
+      required: ["from", "to", "delay", "wait_all"]
+      types:
+        from: "integer"
+        to: "integer"
+        delay: "integer"
+        wait_all: "boolean"
+
+# Pipeline Configuration
+pipeline:
+  # Processing steps
+  steps:
+    - "load_documents"
+    - "create_embeddings"
+    - "extract_information"
+    - "generate_dsl"
+    - "validate_dsl"
+  
+  # Retry configuration
+  max_retries: 3
+  retry_delay: 2
+  
+  # Logging
+  log_level: "INFO"
+  log_file: "logs/pipeline.log"
+  
+  # Output
+  output_dir: "data/generated_dsl"
+  save_intermediate: true
+
+# Prompt Configuration
+prompts:
+  system_prompt_path: "prompts/system_prompt.txt"
+  extraction_prompt_path: "prompts/extraction_prompt.txt"
+  generation_prompt_path: "prompts/generation_prompt.txt"
+  
+  # Prompt parameters
+  include_examples: true
+  max_context_length: 32000  #

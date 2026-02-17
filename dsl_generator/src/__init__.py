@@ -1,0 +1,4 @@
+"""DSL Generator Pipeline - Main Package"""
+
+__version__ = "1.0.0"
+__author__ = "DSL Generator Team"

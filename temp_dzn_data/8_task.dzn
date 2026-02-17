@@ -1,0 +1,98 @@
+% Task Scheduling Data File with Services
+% Generated from Enhanced DSL format
+% Uses h_start and h_end time window instead of horizon
+% Project: 8tasks
+
+
+% Basic parameters
+
+n_tasks = 8;
+
+% Time window
+h_start = 0;  % Planning window start time
+h_end = 150;      % Planning window end time
+
+max_resource = 110;
+
+
+% Service information
+
+n_services = 5;
+
+service_names = ["Payment_Service", "Inventory_Service", "Order_Service", "Shipping_Service", "Notification_Service"];
+
+task_to_service = [1, 2, 4, 3, 5, 2, 2, 3];  % Which service each task belongs to (0 = no service)
+
+% Service composition:
+% Service 1 (Payment_Service): Tasks [T1]
+% Service 2 (Inventory_Service): Tasks [T2, T6, T7]
+% Service 3 (Order_Service): Tasks [T4, T8]
+% Service 4 (Shipping_Service): Tasks [T3]
+% Service 5 (Notification_Service): Tasks [T5]
+
+
+% Task properties
+
+task_names = ["PAY_VAL", "INV_CHK", "SHIP_CALC", "ORD_CONF", "CUST_NOTIF", "WH_ALLOC", "QC_CHK", "FINAL_PROC"];
+
+durations = [5, 4, 10, 8, 4, 5, 9, 6];
+
+resource_reqs = [4, 5, 3, 2, 1, 1, 1, 5];
+
+rep_counts = [0, 3, 3, 0, 1, 3, 0, 3];
+
+rep_delays = [0, 0, 0, 0, 0, 0, 0, 0];
+
+max_concurrency = [4, 5, 3, 2, 2, 5, 2, 5];
+
+task_signatures = ["pay_val", "inv_chk", "ship_calc", "ord_conf", "cust_notif", "wh_alloc", "qc_chk", "final_proc"];
+
+
+% Set up expanded tasks mapping
+
+n_expanded = 21;  % 8 original tasks + 13 repetitions
+
+
+original_task = [
+  % For each task, list all its repetitions (original + additional)
+  1,                % PAY_VAL (1 instance)
+  2, 2, 2, 2,       % INV_CHK (original + 3 repetitions)
+  3, 3, 3, 3,       % SHIP_CALC (original + 3 repetitions)
+  4,                % ORD_CONF (1 instance)
+  5, 5,       % CUST_NOTIF (original + 1 repetitions)
+  6, 6, 6, 6,       % WH_ALLOC (original + 3 repetitions)
+  7,                % QC_CHK (1 instance)
+  8, 8, 8,       % FINAL_PROC (original + 3 repetitions)
+  8                % FINAL_PROC
+];
+
+
+repetition_number = [
+  0,                % PAY_VAL (original)
+  0, 1, 2, 3,       % INV_CHK (original + reps)
+  0, 1, 2, 3,       % SHIP_CALC (original + reps)
+  0,                % ORD_CONF (original)
+  0, 1,       % CUST_NOTIF (original + reps)
+  0, 1, 2, 3,       % WH_ALLOC (original + reps)
+  0,                % QC_CHK (original)
+  0, 1, 2,       % FINAL_PROC (original + reps)
+  3                % FINAL_PROC (original)
+];
+
+
+% Finish-to-start precedence constraints (id: 1 for PAY_VAL, 2 for INV_CHK, etc.)
+
+n_pred = 0;
+pred_from = [];
+pred_to = [];
+pred_wait_all = [];
+
+
+% Start-to-start precedence constraints
+
+n_start_pred = 14;
+start_pred_from = [1, 2, 1, 2, 3, 4, 3, 1, 4, 3, 1, 4, 1, 6];
+start_pred_to =   [2, 3, 4, 4, 4, 5, 6, 6, 6, 8, 8, 8, 7, 7];
+start_pred_wait_all = [false, true, false, true, true, false, false, false, true, true, true, false, true, false];
+start_pred_delays = [5, 9, 21, 16, 10, 8, 16, 10, 7, 13, 11, 13, 11, 10];
+

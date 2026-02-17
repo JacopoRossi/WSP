@@ -1,5 +1,3 @@
-% Task Scheduling Model using CSP in MiniZinc - UNIFIED COMPLETE VERSION
-
 include "globals.mzn";
 
 % Parameters
@@ -25,38 +23,42 @@ array[1..n_tasks] of int: rep_delays;           % Delay between repetitions
 array[1..n_tasks] of int: max_concurrency;      % Maximum concurrent executions
 array[1..n_tasks] of string: task_signatures;   % Task signatures (from model.mzn)
 
-% Number of expanded tasks (including repetitions)
 int: n_expanded;
 
-% Mapping from expanded to original tasks
 array[1..n_expanded] of int: original_task;     % Maps expanded_idx -> original_idx
 array[1..n_expanded] of int: repetition_number; % Maps expanded_idx -> repetition number
 
-% Precedence constraints
-int: n_pred;                           % Number of finish-to-start precedence constraints
-array[1..n_pred] of int: pred_from;    % Predecessor task index
-array[1..n_pred] of int: pred_to;      % Successor task index
-array[1..n_pred] of bool: pred_wait_all; % Whether to wait for all repetitions
+int: n_pred;                           
+array[1..n_pred] of int: pred_from;    
+array[1..n_pred] of int: pred_to;      
+array[1..n_pred] of bool: pred_wait_all; 
 
-% Start-to-start precedence constraints
-int: n_start_pred;                               % Number of start-to-start precedence constraints
-array[1..n_start_pred] of int: start_pred_from;  % Predecessor task index
-array[1..n_start_pred] of int: start_pred_to;    % Successor task index
-array[1..n_start_pred] of bool: start_pred_wait_all; % Whether to wait for all repetitions
-array[1..n_start_pred] of int: start_pred_delays; % Delay between start times
+int: n_start_pred;                               
+array[1..n_start_pred] of int: start_pred_from;  
+array[1..n_start_pred] of int: start_pred_to;    
+array[1..n_start_pred] of bool: start_pred_wait_all; 
+array[1..n_start_pred] of int: start_pred_delays; 
 
+array[1..n_expanded] of var h_start..h_end: start;  
+array[1..n_expanded] of var h_start..h_end: end;    
 
-% Decision variables
-array[1..n_expanded] of var h_start..h_end: start;  % Start time of each expanded task
-array[1..n_expanded] of var h_start..h_end: end;    % End time of each expanded task
-
-% Objective: minimize makespan
 var h_start..h_end: makespan;
 
-% Feasibility tracking variable
 var bool: is_feasible;
 
-% We'll set is_feasible to false if any constraint violations are detected
+
+constraint assert(n_services >= 1, "There must be at least one service");
+constraint assert(n_tasks >= 1, "There must be at least one task");
+constraint assert(
+  forall(s in 1..n_services)(
+    exists(t in 1..n_tasks)(task_to_service[t] = s)
+  ),
+  "Every service must have at least one associated task"
+);
+
+
+
+
 constraint is_feasible <-> (
   % Check basic feasibility conditions
   forall(i in 1..n_expanded)(
@@ -74,16 +76,13 @@ constraint is_feasible <-> (
   )
 );
 
-% Constraints
-% 1. End time calculation
+
 constraint forall(i in 1..n_expanded)(
   end[i] = start[i] + durations[original_task[i]]
 );
 
-% 2. Makespan calculation
 constraint makespan = max(i in 1..n_expanded)(end[i]);
 
-% 3. Finish-to-start precedence constraints
 constraint forall(p in 1..n_pred)(
   let {
     int: from = pred_from[p],
@@ -91,17 +90,14 @@ constraint forall(p in 1..n_pred)(
     bool: wait_all = pred_wait_all[p]
   } in
   if wait_all then
-    % Find the last repetition of the predecessor
     let {
       int: last_rep_idx = max([i | i in 1..n_expanded where original_task[i] = from])
     } in
-    % First repetition of successor must wait for last repetition of predecessor
     let {
       int: first_succ_idx = min([i | i in 1..n_expanded where original_task[i] = to])
     } in
     start[first_succ_idx] >= end[last_rep_idx]
   else
-    % First repetition of successor must wait for first repetition of predecessor
     let {
       int: first_pred_idx = min([i | i in 1..n_expanded where original_task[i] = from]),
       int: first_succ_idx = min([i | i in 1..n_expanded where original_task[i] = to])
@@ -110,7 +106,6 @@ constraint forall(p in 1..n_pred)(
   endif
 );
 
-% 4. Start-to-start precedence constraints with exact delays
 constraint forall(p in 1..n_start_pred)(
   let {
     int: from = start_pred_from[p],
@@ -119,7 +114,6 @@ constraint forall(p in 1..n_start_pred)(
     int: delay = start_pred_delays[p]
   } in
   if wait_all then
-    % Wait for the LAST repetition of predecessor, then apply delay to ALL successor repetitions
     let {
       int: last_pred_idx = max([i | i in 1..n_expanded where original_task[i] = from])
     } in
@@ -127,7 +121,6 @@ constraint forall(p in 1..n_start_pred)(
       start[succ_idx] >= start[last_pred_idx] + delay
     )
   else
-    % Wait for the FIRST repetition of predecessor, apply delay to ALL successor repetitions
     let {
       int: first_pred_idx = min([i | i in 1..n_expanded where original_task[i] = from])
     } in
@@ -137,34 +130,28 @@ constraint forall(p in 1..n_start_pred)(
   endif
 );
 
-% 5. Repetition constraints
 constraint forall(task in 1..n_tasks where rep_counts[task] > 0)(
-  % Find indices of all repetitions for this task, stored in a 1-based array
   let {
     array[1..(rep_counts[task]+1)] of int: task_rep_indices = [
       min([i | i in 1..n_expanded where original_task[i] = task /\ repetition_number[i] = rep]) 
       | rep in 0..rep_counts[task]
     ]
   } in
-  % Each repetition must start at least rep_delays after the previous one starts
   forall(r in 1..rep_counts[task])(
     start[task_rep_indices[r+1]] >= start[task_rep_indices[r]] + rep_delays[task]
   )
 );
 
-% 6. Resource (resource) constraints
 constraint forall(t in 0..(h_end - h_start)-1)(
   sum(i in 1..n_expanded where start[i] <= t /\ t < end[i])(
     resource_reqs[original_task[i]]
   ) <= max_resource
 );
 
-% 7. Concurrent repetition constraints
 constraint forall(task in 1..n_tasks, t in 0..(h_end - h_start)-1)(
   sum(i in 1..n_expanded where original_task[i] = task /\ start[i] <= t /\ t < end[i])(1) <= max_concurrency[task]
 );
 
-% Objective - but allow solutions even if not optimal
 solve minimize makespan;
 
 % Clean Output

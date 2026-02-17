@@ -1,0 +1,25 @@
+# Core LLM dependencies (essenziali per GPT)
+langchain==0.1.0
+langchain-core>=0.1.0
+langchain-community==0.0.13
+langchain-openai==0.0.5
+openai>=1.0.0
+
+# Vector store (leggero)
+chromadb==0.4.22
+
+# Document processing (essenziali)
+pypdf==4.0.1
+python-docx==1.1.0
+markdown==3.5.2
+
+# Data handling (essenziali)
+pyyaml==6.0.1
+pydantic==2.5.3
+python-dotenv==1.0.1
+
+# Utilities (essenziali)
+tqdm==4.66.1
+
+# Testing (opzionale - puoi commentare se non serve)
+pytest==8.0.0

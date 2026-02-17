@@ -1,0 +1,192 @@
+% Task Scheduling Data File with Services
+% Generated from Enhanced DSL format
+% Uses h_start and h_end time window instead of horizon
+% Project: 52Tasks
+
+
+% Basic parameters
+
+n_tasks = 52;
+
+% Time window
+h_start = 0;  % Planning window start time
+h_end = 586;      % Planning window end time
+
+max_resource = 266;
+
+
+% Service information
+
+n_services = 11;
+
+service_names = ["Payment_Service", "Inventory_Service", "Order_Service", "Shipping_Service", "Notification_Service", "Security_Service", "Analytics_Service", "Processing_Service", "Infrastructure_Service", "Recommendation_Service", "Refund_Service"];
+
+task_to_service = [1, 2, 4, 3, 5, 2, 2, 3, 1, 3, 6, 3, 6, 7, 9, 7, 6, 6, 9, 3, 1, 1, 1, 1, 10, 2, 11, 10, 7, 9, 9, 9, 9, 9, 6, 6, 5, 5, 5, 5, 8, 8, 8, 8, 8, 7, 7, 7, 10, 10, 10, 9];  % Which service each task belongs to (0 = no service)
+
+% Service composition:
+% Service 1 (Payment_Service): Tasks [T1, T9, T21, T22, T23, T24]
+% Service 2 (Inventory_Service): Tasks [T2, T6, T7, T26]
+% Service 3 (Order_Service): Tasks [T4, T8, T10, T12, T20]
+% Service 4 (Shipping_Service): Tasks [T3]
+% Service 5 (Notification_Service): Tasks [T5, T37, T38, T39, T40]
+% Service 6 (Security_Service): Tasks [T11, T13, T17, T18, T35, T36]
+% Service 7 (Analytics_Service): Tasks [T14, T16, T29, T46, T47, T48]
+% Service 8 (Processing_Service): Tasks [T41, T42, T43, T44, T45]
+% Service 9 (Infrastructure_Service): Tasks [T15, T19, T30, T31, T32, T33, T34, T52]
+% Service 10 (Recommendation_Service): Tasks [T25, T28, T49, T50, T51]
+% Service 11 (Refund_Service): Tasks [T27]
+
+
+% Task properties
+
+task_names = ["PAY_VAL", "INV_CHK", "SHIP_CALC", "ORD_CONF", "CUST_NOTIF", "WH_ALLOC", "QC_CHK", "FINAL_PROC", "TAX_CALC", "DOC_GEN", "COMP_CHK", "ARCH_PROC", "SEC_VAL", "PERF_MON", "BCK_CREA", "RPT_GEN", "DATA_ENCR", "AUD_TRL", "SYS_CLN", "FINAL_VAL", "RISK_ASMT", "FRD_DET", "CUR_CONV", "PRC_OPT", "LOY_PROC", "RET_HDL", "REF_PROC", "PRD_REC", "ANLY_UPD", "CACHE_REFR", "LOG_PROC", "ERR_HDL", "LOAD_BAL", "DB_SYNC", "API_VAL", "SESS_MGT", "EMAIL_DISP", "SMS_NOTIF", "PUSH_NOTIF", "HOOK_TRIG", "CONT_MOD", "IMG_PROC", "VID_PROC", "FILE_UPL", "META_EXTR", "SRCH_IDX", "REC_ENG", "AB_TEST", "FEAT_TGL", "RATE_LMT", "CIRC_BRK", "HLTH_CHK"];
+
+durations = [5, 4, 10, 8, 8, 9, 6, 5, 3, 9, 10, 6, 6, 4, 8, 3, 10, 6, 4, 3, 10, 6, 10, 3, 6, 3, 4, 9, 4, 3, 10, 8, 7, 7, 5, 6, 8, 5, 7, 5, 8, 9, 6, 7, 6, 10, 5, 5, 3, 6, 10, 9];
+
+resource_reqs = [4, 5, 3, 2, 5, 4, 4, 3, 5, 5, 5, 5, 1, 1, 2, 3, 5, 2, 1, 3, 1, 2, 5, 3, 5, 1, 1, 5, 2, 1, 4, 3, 1, 2, 1, 5, 4, 5, 5, 3, 2, 3, 1, 5, 2, 2, 4, 2, 3, 1, 3, 1];
+
+rep_counts = [0, 3, 3, 0, 0, 3, 1, 0, 2, 2, 0, 3, 1, 2, 1, 0, 0, 1, 0, 0, 1, 3, 0, 0, 1, 2, 1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 3, 3, 0, 0, 0, 2, 0, 3, 0, 3, 2, 0, 2, 0, 2, 3];
+
+rep_delays = [0, 0, 0, 0, 0, 16, 0, 0, 0, 4, 0, 16, 0, 0, 0, 0, 0, 0, 4, 0, 0, 8, 0, 0, 0, 8, 12, 0, 14, 9, 0, 0, 0, 0, 7, 0, 0, 6, 0, 3, 0, 8, 0, 7, 0, 15, 0, 0, 0, 0, 0, 12];
+
+max_concurrency = [4, 5, 3, 2, 1, 1, 2, 5, 1, 2, 4, 2, 3, 3, 5, 5, 1, 1, 3, 4, 5, 5, 4, 3, 4, 3, 2, 4, 5, 3, 3, 5, 1, 4, 4, 3, 2, 2, 2, 2, 4, 2, 1, 5, 1, 3, 2, 4, 2, 5, 4, 3];
+
+task_signatures = ["pay_val", "inv_chk", "ship_calc", "ord_conf", "cust_notif", "wh_alloc", "qc_chk", "final_proc", "tax_calc", "doc_gen", "comp_chk", "arch_proc", "sec_val", "perf_mon", "bck_crea", "rpt_gen", "data_encr", "aud_trl", "sys_cln", "final_val", "risk_asmt", "frd_det", "cur_conv", "prc_opt", "loy_proc", "ret_hdl", "ref_proc", "prd_rec", "anly_upd", "cache_refr", "log_proc", "err_hdl", "load_bal", "db_sync", "api_val", "sess_mgt", "email_disp", "sms_notif", "push_notif", "hook_trig", "cont_mod", "img_proc", "vid_proc", "file_upl", "meta_extr", "srch_idx", "rec_eng", "ab_test", "feat_tgl", "rate_lmt", "circ_brk", "hlth_chk"];
+
+
+% Set up expanded tasks mapping
+
+n_expanded = 109;  % 52 original tasks + 57 repetitions
+
+
+original_task = [
+  % For each task, list all its repetitions (original + additional)
+  1,                % PAY_VAL (1 instance)
+  2, 2, 2, 2,       % INV_CHK (original + 3 repetitions)
+  3, 3, 3, 3,       % SHIP_CALC (original + 3 repetitions)
+  4,                % ORD_CONF (1 instance)
+  5,                % CUST_NOTIF (1 instance)
+  6, 6, 6, 6,       % WH_ALLOC (original + 3 repetitions)
+  7, 7,       % QC_CHK (original + 1 repetitions)
+  8,                % FINAL_PROC (1 instance)
+  9, 9, 9,       % TAX_CALC (original + 2 repetitions)
+  10, 10, 10,       % DOC_GEN (original + 2 repetitions)
+  11,                % COMP_CHK (1 instance)
+  12, 12, 12, 12,       % ARCH_PROC (original + 3 repetitions)
+  13, 13,       % SEC_VAL (original + 1 repetitions)
+  14, 14, 14,       % PERF_MON (original + 2 repetitions)
+  15, 15,       % BCK_CREA (original + 1 repetitions)
+  16,                % RPT_GEN (1 instance)
+  17,                % DATA_ENCR (1 instance)
+  18, 18,       % AUD_TRL (original + 1 repetitions)
+  19,                % SYS_CLN (1 instance)
+  20,                % FINAL_VAL (1 instance)
+  21, 21,       % RISK_ASMT (original + 1 repetitions)
+  22, 22, 22, 22,       % FRD_DET (original + 3 repetitions)
+  23,                % CUR_CONV (1 instance)
+  24,                % PRC_OPT (1 instance)
+  25, 25,       % LOY_PROC (original + 1 repetitions)
+  26, 26, 26,       % RET_HDL (original + 2 repetitions)
+  27, 27,       % REF_PROC (original + 1 repetitions)
+  28,                % PRD_REC (1 instance)
+  29,                % ANLY_UPD (1 instance)
+  30,                % CACHE_REFR (1 instance)
+  31,                % LOG_PROC (1 instance)
+  32, 32,       % ERR_HDL (original + 1 repetitions)
+  33, 33,       % LOAD_BAL (original + 1 repetitions)
+  34,                % DB_SYNC (1 instance)
+  35, 35, 35,       % API_VAL (original + 2 repetitions)
+  36,                % SESS_MGT (1 instance)
+  37, 37, 37, 37,       % EMAIL_DISP (original + 3 repetitions)
+  38, 38, 38, 38,       % SMS_NOTIF (original + 3 repetitions)
+  39,                % PUSH_NOTIF (1 instance)
+  40,                % HOOK_TRIG (1 instance)
+  41,                % CONT_MOD (1 instance)
+  42, 42, 42,       % IMG_PROC (original + 2 repetitions)
+  43,                % VID_PROC (1 instance)
+  44, 44, 44, 44,       % FILE_UPL (original + 3 repetitions)
+  45,                % META_EXTR (1 instance)
+  46, 46, 46, 46,       % SRCH_IDX (original + 3 repetitions)
+  47, 47, 47,       % REC_ENG (original + 2 repetitions)
+  48,                % AB_TEST (1 instance)
+  49, 49, 49,       % FEAT_TGL (original + 2 repetitions)
+  50,                % RATE_LMT (1 instance)
+  51, 51, 51,       % CIRC_BRK (original + 2 repetitions)
+  52, 52, 52,       % HLTH_CHK (original + 3 repetitions)
+  52                % HLTH_CHK
+];
+
+
+repetition_number = [
+  0,                % PAY_VAL (original)
+  0, 1, 2, 3,       % INV_CHK (original + reps)
+  0, 1, 2, 3,       % SHIP_CALC (original + reps)
+  0,                % ORD_CONF (original)
+  0,                % CUST_NOTIF (original)
+  0, 1, 2, 3,       % WH_ALLOC (original + reps)
+  0, 1,       % QC_CHK (original + reps)
+  0,                % FINAL_PROC (original)
+  0, 1, 2,       % TAX_CALC (original + reps)
+  0, 1, 2,       % DOC_GEN (original + reps)
+  0,                % COMP_CHK (original)
+  0, 1, 2, 3,       % ARCH_PROC (original + reps)
+  0, 1,       % SEC_VAL (original + reps)
+  0, 1, 2,       % PERF_MON (original + reps)
+  0, 1,       % BCK_CREA (original + reps)
+  0,                % RPT_GEN (original)
+  0,                % DATA_ENCR (original)
+  0, 1,       % AUD_TRL (original + reps)
+  0,                % SYS_CLN (original)
+  0,                % FINAL_VAL (original)
+  0, 1,       % RISK_ASMT (original + reps)
+  0, 1, 2, 3,       % FRD_DET (original + reps)
+  0,                % CUR_CONV (original)
+  0,                % PRC_OPT (original)
+  0, 1,       % LOY_PROC (original + reps)
+  0, 1, 2,       % RET_HDL (original + reps)
+  0, 1,       % REF_PROC (original + reps)
+  0,                % PRD_REC (original)
+  0,                % ANLY_UPD (original)
+  0,                % CACHE_REFR (original)
+  0,                % LOG_PROC (original)
+  0, 1,       % ERR_HDL (original + reps)
+  0, 1,       % LOAD_BAL (original + reps)
+  0,                % DB_SYNC (original)
+  0, 1, 2,       % API_VAL (original + reps)
+  0,                % SESS_MGT (original)
+  0, 1, 2, 3,       % EMAIL_DISP (original + reps)
+  0, 1, 2, 3,       % SMS_NOTIF (original + reps)
+  0,                % PUSH_NOTIF (original)
+  0,                % HOOK_TRIG (original)
+  0,                % CONT_MOD (original)
+  0, 1, 2,       % IMG_PROC (original + reps)
+  0,                % VID_PROC (original)
+  0, 1, 2, 3,       % FILE_UPL (original + reps)
+  0,                % META_EXTR (original)
+  0, 1, 2, 3,       % SRCH_IDX (original + reps)
+  0, 1, 2,       % REC_ENG (original + reps)
+  0,                % AB_TEST (original)
+  0, 1, 2,       % FEAT_TGL (original + reps)
+  0,                % RATE_LMT (original)
+  0, 1, 2,       % CIRC_BRK (original + reps)
+  0, 1, 2,       % HLTH_CHK (original + reps)
+  3                % HLTH_CHK (original)
+];
+
+
+% Finish-to-start precedence constraints (id: 1 for PAY_VAL, 2 for INV_CHK, etc.)
+
+n_pred = 0;
+pred_from = [];
+pred_to = [];
+pred_wait_all = [];
+
+
+% Start-to-start precedence constraints
+
+n_start_pred = 102;
+start_pred_from = [1, 2, 1, 2, 3, 1, 3, 5, 1, 5, 4, 7, 3, 1, 6, 5, 9, 3, 4, 6, 9, 10, 5, 9, 6, 3, 15, 10, 13, 1, 16, 12, 15, 15, 12, 13, 17, 16, 17, 18, 20, 3, 14, 21, 21, 22, 18, 24, 20, 20, 8, 22, 14, 2, 11, 10, 17, 30, 29, 28, 32, 31, 25, 30, 27, 4, 32, 28, 31, 33, 35, 36, 30, 33, 31, 39, 36, 20, 21, 10, 8, 1, 20, 20, 2, 37, 43, 41, 38, 44, 42, 45, 35, 29, 4, 46, 46, 47, 42, 49, 47, 49];
+start_pred_to =   [2, 3, 4, 4, 4, 5, 5, 6, 7, 7, 7, 8, 8, 9, 9, 9, 10, 11, 11, 12, 12, 13, 13, 13, 14, 15, 16, 16, 17, 18, 18, 19, 19, 20, 20, 20, 21, 22, 23, 23, 23, 24, 24, 25, 26, 26, 26, 27, 27, 28, 28, 29, 30, 30, 30, 31, 31, 32, 32, 32, 33, 33, 33, 34, 34, 34, 35, 36, 37, 37, 37, 38, 38, 38, 39, 40, 40, 41, 41, 41, 42, 42, 42, 43, 43, 43, 44, 44, 45, 45, 46, 46, 47, 47, 47, 48, 49, 49, 49, 50, 51, 52];
+start_pred_wait_all = [false, true, false, true, true, false, true, false, true, false, false, true, false, false, false, true, false, true, true, true, true, false, true, false, true, true, true, true, false, true, false, true, false, true, false, true, true, false, false, true, false, true, false, false, true, false, false, false, false, false, true, true, true, true, false, false, true, true, true, false, true, true, false, false, false, true, true, false, true, true, false, false, false, false, true, true, false, true, true, false, true, false, true, true, true, false, false, true, false, false, true, false, true, true, false, false, true, true, false, true, false, false];
+start_pred_delays = [5, 9, 21, 16, 10, 6, 12, 13, 13, 8, 12, 12, 11, 7, 15, 6, 7, 12, 12, 16, 6, 16, 16, 11, 14, 16, 15, 6, 5, 8, 14, 14, 8, 7, 15, 5, 10, 7, 14, 5, 9, 13, 9, 10, 6, 12, 11, 14, 13, 16, 8, 16, 10, 5, 16, 13, 5, 14, 7, 10, 15, 12, 15, 13, 14, 13, 10, 10, 11, 14, 9, 8, 12, 8, 8, 7, 10, 6, 8, 12, 5, 10, 5, 9, 10, 8, 6, 7, 13, 13, 8, 6, 7, 12, 6, 7, 16, 12, 6, 12, 10, 10];
+

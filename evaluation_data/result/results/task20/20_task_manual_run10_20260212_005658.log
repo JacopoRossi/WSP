@@ -1,0 +1,256 @@
+UnifyScript run for 20_task_manual_run10.dsl
+Started at: 2026-02-12 00:57:06.405713
+Model: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/minizinc_model/modelAllOpsParameter.mzn
+DSL File: /home/ice/Desktop/OFFICIALFOLDER_GITHUB/WSP_version1/DSL/task20/20_task_manual_run10.dsl
+================================================================================
+
+Command: python unifyScript.py minizinc_model/modelAllOpsParameter.mzn DSL/task20/20_task_manual_run10.dsl
+
+STDOUT:
+ TASK SCHEDULING PIPELINE AUTOMATION
+============================================================
+ Input model file: minizinc_model/modelAllOpsParameter.mzn
+ Input DSL file: DSL/task20/20_task_manual_run10.dsl
+ Output DZN file: dzn_experiments/20_task_manual_run10.dzn
+ Base name: 20_task_manual_run10
+
+ DSL to DZN Conversion
+   Command: python 0_1_dsl_converter.py DSL/task20/20_task_manual_run10.dsl dzn_experiments/20_task_manual_run10.dzn
+   ==================================================
+Successfully converted DSL/task20/20_task_manual_run10.dsl to dzn_experiments/20_task_manual_run10.dzn
+
+✅ DSL to DZN Conversion completed successfully!
+
+ MiniZinc Execution & Gantt Chart Generation
+   Command: python 0_2_minizinc.py minizinc_model/modelAllOpsParameter.mzn dzn_experiments/20_task_manual_run10.dzn
+   ==================================================
+Loading model: minizinc_model/modelAllOpsParameter.mzn
+Loading data: dzn_experiments/20_task_manual_run10.dzn
+Solving...
+
+Result:
+FEASIBLE
+Makespan end: 144
+
+Schedule:
+Task "PAYMENT_VALIDATION": start=0, end=5
+Task "INVENTORY_CHECK": start=5, end=9
+Task "INVENTORY_CHECK" (Rep2): start=5, end=9
+Task "INVENTORY_CHECK" (Rep3): start=5, end=9
+Task "INVENTORY_CHECK" (Rep4): start=5, end=9
+Task "SHIPPING_CALCULATION": start=14, end=24
+Task "SHIPPING_CALCULATION" (Rep2): start=14, end=24
+Task "SHIPPING_CALCULATION" (Rep3): start=14, end=24
+Task "SHIPPING_CALCULATION" (Rep4): start=24, end=34
+Task "ORDER_CONFIRMATION": start=34, end=42
+Task "CUSTOMER_NOTIFICATION": start=46, end=56
+Task "WAREHOUSE_ALLOCATION": start=61, end=69
+Task "QUALITY_CHECK": start=68, end=74
+Task "FINAL_PROCESSING": start=46, end=56
+Task "TAX_CALCULATION": start=44, end=50
+Task "TAX_CALCULATION" (Rep2): start=44, end=50
+Task "TAX_CALCULATION" (Rep3): start=50, end=56
+Task "DOCUMENT_GENERATION": start=42, end=47
+Task "COMPLIANCE_CHECK": start=58, end=63
+Task "COMPLIANCE_CHECK" (Rep2): start=58, end=63
+Task "COMPLIANCE_CHECK" (Rep3): start=58, end=63
+Task "ARCHIVE_PROCESSING": start=67, end=73
+Task "ARCHIVE_PROCESSING" (Rep2): start=67, end=73
+Task "ARCHIVE_PROCESSING" (Rep3): start=67, end=73
+Task "SECURITY_VALIDATION": start=77, end=85
+Task "SECURITY_VALIDATION" (Rep2): start=93, end=101
+Task "SECURITY_VALIDATION" (Rep3): start=109, end=117
+Task "SECURITY_VALIDATION" (Rep4): start=125, end=133
+Task "PERFORMANCE_MONITOR": start=72, end=82
+Task "PERFORMANCE_MONITOR" (Rep2): start=72, end=82
+Task "PERFORMANCE_MONITOR" (Rep3): start=72, end=82
+Task "BACKUP_CREATION": start=84, end=90
+Task "BACKUP_CREATION" (Rep2): start=84, end=90
+Task "BACKUP_CREATION" (Rep3): start=90, end=96
+Task "BACKUP_CREATION" (Rep4): start=90, end=96
+Task "REPORT_GENERATION": start=80, end=87
+Task "DATA_ENCRYPTION": start=80, end=87
+Task "DATA_ENCRYPTION" (Rep2): start=82, end=89
+Task "AUDIT_TRAIL": start=131, end=136
+Task "AUDIT_TRAIL" (Rep2): start=135, end=140
+Task "AUDIT_TRAIL" (Rep3): start=139, end=144
+Task "SYSTEM_CLEANUP": start=139, end=143
+Task "SYSTEM_CLEANUP" (Rep2): start=139, end=143
+Task "SYSTEM_CLEANUP" (Rep3): start=139, end=143
+Task "FINAL_VALIDATION": start=95, end=105
+
+
+Resource: 4;4;4;4;4;20;20;20;20;0;0;0;0;0;9;9;9;9;9;9;9;9;9;9;3;3;3;3;3;3;3;3;3;3;2;2;2;2;2;2;2;2;1;1;9;9;16;15;15;15;11;11;11;11;11;11;0;0;15;15;15;16;16;1;1;1;1;4;6;5;5;5;11;8;6;6;6;10;10;10;17;17;14;14;20;16;16;9;9;6;6;6;6;10;10;14;8;8;8;8;8;4;4;4;4;0;0;0;0;4;4;4;4;4;4;4;4;0;0;0;0;0;0;0;0;4;4;4;4;4;4;6;6;2;2;4;2;2;2;16;14;14;14;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+
+
+=== RESOURCE UTILIZATION ===
+Time	resource Used	resource Available	Utilization (%)	Utilization (fraction)
+0	4	170	2%	0.23
+1	4	170	2%	0.23
+2	4	170	2%	0.23
+3	4	170	2%	0.23
+4	4	170	2%	0.23
+5	20	170	11%	0.117
+6	20	170	11%	0.117
+7	20	170	11%	0.117
+8	20	170	11%	0.117
+9	0	170	0%	0.0
+10	0	170	0%	0.0
+11	0	170	0%	0.0
+12	0	170	0%	0.0
+13	0	170	0%	0.0
+14	9	170	5%	0.52
+15	9	170	5%	0.52
+16	9	170	5%	0.52
+17	9	170	5%	0.52
+18	9	170	5%	0.52
+19	9	170	5%	0.52
+20	9	170	5%	0.52
+21	9	170	5%	0.52
+22	9	170	5%	0.52
+23	9	170	5%	0.52
+24	3	170	1%	0.17
+25	3	170	1%	0.17
+26	3	170	1%	0.17
+27	3	170	1%	0.17
+28	3	170	1%	0.17
+29	3	170	1%	0.17
+30	3	170	1%	0.17
+31	3	170	1%	0.17
+32	3	170	1%	0.17
+33	3	170	1%	0.17
+34	2	170	1%	0.11
+35	2	170	1%	0.11
+36	2	170	1%	0.11
+37	2	170	1%	0.11
+38	2	170	1%	0.11
+39	2	170	1%	0.11
+40	2	170	1%	0.11
+41	2	170	1%	0.11
+42	1	170	0%	0.5
+43	1	170	0%	0.5
+44	9	170	5%	0.52
+45	9	170	5%	0.52
+46	16	170	9%	0.94
+47	15	170	8%	0.88
+48	15	170	8%	0.88
+49	15	170	8%	0.88
+50	11	170	6%	0.64
+51	11	170	6%	0.64
+52	11	170	6%	0.64
+53	11	170	6%	0.64
+54	11	170	6%	0.64
+55	11	170	6%	0.64
+56	0	170	0%	0.0
+57	0	170	0%	0.0
+58	15	170	8%	0.88
+59	15	170	8%	0.88
+60	15	170	8%	0.88
+61	16	170	9%	0.94
+62	16	170	9%	0.94
+63	1	170	0%	0.5
+64	1	170	0%	0.5
+65	1	170	0%	0.5
+66	1	170	0%	0.5
+67	4	170	2%	0.23
+68	6	170	3%	0.35
+69	5	170	2%	0.29
+70	5	170	2%	0.29
+71	5	170	2%	0.29
+72	11	170	6%	0.64
+73	8	170	4%	0.47
+74	6	170	3%	0.35
+75	6	170	3%	0.35
+76	6	170	3%	0.35
+77	10	170	5%	0.58
+78	10	170	5%	0.58
+79	10	170	5%	0.58
+80	17	170	10%	0.100
+81	17	170	10%	0.100
+82	14	170	8%	0.82
+83	14	170	8%	0.82
+84	20	170	11%	0.117
+85	16	170	9%	0.94
+86	16	170	9%	0.94
+87	9	170	5%	0.52
+88	9	170	5%	0.52
+89	6	170	3%	0.35
+90	6	170	3%	0.35
+91	6	170	3%	0.35
+92	6	170	3%	0.35
+93	10	170	5%	0.58
+94	10	170	5%	0.58
+95	14	170	8%	0.82
+96	8	170	4%	0.47
+97	8	170	4%	0.47
+98	8	170	4%	0.47
+99	8	170	4%	0.47
+100	8	170	4%	0.47
+101	4	170	2%	0.23
+102	4	170	2%	0.23
+103	4	170	2%	0.23
+104	4	170	2%	0.23
+105	0	170	0%	0.0
+106	0	170	0%	0.0
+107	0	170	0%	0.0
+108	0	170	0%	0.0
+109	4	170	2%	0.23
+110	4	170	2%	0.23
+111	4	170	2%	0.23
+112	4	170	2%	0.23
+113	4	170	2%	0.23
+114	4	170	2%	0.23
+115	4	170	2%	0.23
+116	4	170	2%	0.23
+117	0	170	0%	0.0
+118	0	170	0%	0.0
+119	0	170	0%	0.0
+120	0	170	0%	0.0
+121	0	170	0%	0.0
+122	0	170	0%	0.0
+123	0	170	0%	0.0
+124	0	170	0%	0.0
+125	4	170	2%	0.23
+126	4	170	2%	0.23
+127	4	170	2%	0.23
+128	4	170	2%	0.23
+129	4	170	2%	0.23
+130	4	170	2%	0.23
+131	6	170	3%	0.35
+132	6	170	3%	0.35
+133	2	170	1%	0.11
+134	2	170	1%	0.11
+135	4	170	2%	0.23
+136	2	170	1%	0.11
+137	2	170	1%	0.11
+138	2	170	1%	0.11
+139	16	170	9%	0.94
+140	14	170	8%	0.82
+141	14	170	8%	0.82
+142	14	170	8%	0.82
+143	2	170	1%	0.11
+144	0	170	0%	0.0
+
+=== OVERALL RESOURCE STATISTICS ===
+resource Resource Summary:
+  Total Available: 170
+  Peak Usage: 20 (11%)
+  Average Usage: 6 (3%)
+  Time Window: [0..330]
+  Active Time Steps: 145
+
+
+✅ MiniZinc Execution & Gantt Chart Generation completed successfully!
+
+============================================================
+ PIPELINE COMPLETED SUCCESSFULLY!
+============================================================
+ DSL file processed: DSL/task20/20_task_manual_run10.dsl
+ DZN file generated: dzn_experiments/20_task_manual_run10.dzn
+ MiniZinc execution completed
+ Gantt chart generated
+
+ Check the output for your scheduling results!
+
+Return code: 0
+Completed at: 2026-02-12 00:57:10.060986

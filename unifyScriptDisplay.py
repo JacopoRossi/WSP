@@ -159,7 +159,7 @@ Examples:
     file_stem = dsl_path.stem  # e.g., "22_space" from "22_space.dsl"
     
     # Build paths
-    dzn_output = f".\\dzn_experiments\\{file_stem}.dzn"
+    dzn_output = Path("temp_dzn_data") / f"{file_stem}.dzn"
     
     print(" TASK SCHEDULING PIPELINE AUTOMATION")
     print("="*60)
@@ -169,15 +169,15 @@ Examples:
     print(f" Base name: {file_stem}")
     print(f" Using temporary file for MiniZinc results")
     
-    # Create dzn_experiments directory if it doesn't exist
-    dzn_dir = Path("dzn_experiments")
+    # Create temp_dzn_data directory if it doesn't exist
+    dzn_dir = Path("temp_dzn_data")
     dzn_dir.mkdir(exist_ok=True)
     
     temp_file_path = None
     
     try:
         # Step 1: Convert DSL to DZN
-        cmd1 = f"python .\\0_1_dsl_converter.py {args.dsl_file} {dzn_output}"
+        cmd1 = f"python 0_1_dsl_converter.py {args.dsl_file} {dzn_output}"
         success1 = run_command(cmd1, "DSL to DZN Conversion")
         
         if not success1:
@@ -198,7 +198,7 @@ Examples:
             sys.exit(1)
         
         # Step 3: Generate Gantt chart using the temporary file
-        display_cmd = f"python .\\0_3_display.py {temp_file_path}"
+        display_cmd = f"python 0_3_display.py {temp_file_path}"
         success3 = run_command(display_cmd, "Gantt Chart Generation")
         
         if not success3:
