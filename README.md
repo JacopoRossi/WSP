@@ -16,7 +16,10 @@ minizinc_model/             # MiniZinc models (.mzn)
 SpaceOBC_DSL/               # Example DSL files (SpaceOBC)
 Syntethic_DSL/              # Synthetic DSL examples
 evaluation_data/            # Documentation and test data for DSL generation
+evaluation_script/          # Evaluation tools 
+evaluation_llm_direct_use/  # Evaluation of direct LLM usage
 test_results/               # Contains the time results 
+env.yml                     # Conda environment definition
 ```
 
 ## Requirements
